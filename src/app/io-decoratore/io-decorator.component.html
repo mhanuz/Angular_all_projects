@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row" >
+      <div class="col-md-4">
+        <h1>Use of Input Outpur Decorator</h1>
+        <div>
+          <label for="input"> Input Parent Component Value </label> 
+          <input type="text" 
+          id="input"  
+          class="form-control"
+          #parentValue
+          >
+          <button type="button" 
+          style="margin-top: 10px;"
+          class="btn btn-success" 
+          (click)="addParentValue(parentValue.value)">Add </button>
+        </div>
+        <app-child1 [parentItem] ="parentData"></app-child1>
+        <app-child2 (childTwoValue)="childTwoValue($event)"></app-child2>
+        <p>Parent Component Value that come from child 2:
+          <b>{{childValue}}</b></p>
+      </div>
+    </div>
+  </div>

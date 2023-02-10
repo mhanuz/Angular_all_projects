@@ -1,0 +1,42 @@
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2> Custome Pipe: Name Swapping And Adding Title</h2>
+  <label for="fname">First Name: </label>
+  <input type="text"
+  class="form-control" 
+  id="fname" 
+  #fname>
+  <br>
+  <label for="lname">Last Name: </label>
+  <input type="text"
+  class="form-control" 
+  id="lname" 
+  #lname>
+  <br>
+  <select 
+    class="form-select"
+    aria-label="Default select example"
+    #gender>
+    <option value="M">Male</option>
+    <option value="F">Female</option>
+    <option value="U">Unknown</option>
+  </select>
+
+  <br>
+  <button type="button"
+  class="btn btn-primary"
+  style="margin-top: 5px;"
+   (click)="addName(fname.value, lname.value)" > Click Me!</button>
+
+   <div class="lower-div">
+    <p *ngIf="name">Original Name: {{ name }}</p>
+    <!-- custome pipe: without parameter-->
+    <p *ngIf="name">Swapped Name: {{ name | nameswap}}</p>
+    <!-- custome pipe: add automatice title-->
+    <p *ngIf="name">Add title: {{ name | addtitle: gender.value }}</p>
+   </div>
+  </div>
+</div>
+</div>

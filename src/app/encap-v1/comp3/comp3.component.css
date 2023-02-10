@@ -1,0 +1,17 @@
+.c{
+    height: 200px;
+    width: 200px;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: lightgreen;
+    border: 2px solid rebeccapurple;
+    border-radius: 10%;
+    
+}
+
+.c:hover{
+    background-color: rgb(226, 43, 43);
+    height: 200px;
+    width: 250px;
+}

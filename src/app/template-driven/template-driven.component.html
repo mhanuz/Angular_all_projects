@@ -1,0 +1,246 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2> Customer Information</h2>
+        <form (ngSubmit)="onSubmit()" #f="ngForm">
+          <p>Basic Info</p>
+          <div class="form-group" >
+            <label for="firstname">First Name</label>
+            <input type="text" class="form-control" id="firstname"
+            ngModel
+            name="firstname"
+            placeholder="First Name"
+            minlength="4"
+            maxlength="15"
+            required
+            #firstname="ngModel"
+            >
+            <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)">
+              <span class="help-block" *ngIf="firstname.errors?.['required']">Name is required</span>
+              <span class="help-block" *ngIf="eventVal">Only Character</span>
+              <span class="help-block" *ngIf="firstname.errors?.['minlength']">Atleast 4 Character</span>
+              <span class="help-block" *ngIf="firstname.errors?.['maxlength']">Atmost 15 Character</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" class="form-control" id="lastname" 
+            ngModel
+            name="lastname"
+            minlength="4"
+            maxlength="15"
+            placeholder="Last Name"
+            required
+            lastname
+            #lastname="ngModel"
+            >
+            <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
+              <span class="help-block" *ngIf="lastname.errors?.['required']">Name is required</span>
+              <span class="help-block" *ngIf="eventVal">Only Character</span>
+              <span class="help-block" *ngIf="lastname.errors?.['minlength']">Atleast 4 Character</span>
+              <span class="help-block" *ngIf="lastname.errors?.['maxlength']">Atmost 15 Character</span>
+            </div>
+          </div>
+      
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email"
+            ngModel
+            name="email"
+            placeholder="Email address"
+            email
+            #emailAddress="ngModel"
+            >
+            <span class="help-block" *ngIf="emailAddress.errors?.email">Email is not valid</span>
+          </div>
+      
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="number" class="form-control" id="phone" 
+            ngModel
+            name="phone"
+            placeholder="Phone Number"
+            required
+            phone
+            #phone="ngModel">
+            <span class="help-block" *ngIf="!phone.valid && phone.touched">required field</span>
+          </div>
+      
+          <p>Primary Addres</p> 
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="gridCheck"
+              [checked]="primaryCheckBoxValue"
+               (click)="copyBasicInfoIntoPrimaryAddress()">
+              <label class="form-check-label" for="gridCheck">
+                Check (if phone and email is same)
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="pemail">Email address</label>
+            <input type="email" class="form-control" id="pemail" 
+            placeholder="Enter email"
+            ngModel
+            name="pemail"
+            [ngModel]="customer.primaryAddress.email"
+            pemail
+            email="true"
+            #pemailAddress="ngModel"
+            >
+            <span class="help-block" *ngIf="pemailAddress.errors?.email">Email is not valid</span>
+          </div>
+      
+          <div class="form-group">
+            <label for="pphone">Phone Number</label>
+            <input type="number" class="form-control" id="pphone" 
+            placeholder="Primary Phone"
+            ngModel
+            name="pphone"
+            required
+            [ngModel]="customer.primaryAddress.phone"
+            pphone
+            #pphone="ngModel">
+            <span class="help-block" *ngIf="!pphone.valid && pphone.touched">required field</span>
+          </div>
+      
+      
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" id="address" 
+            ngModel
+            name="address"
+            placeholder="Address"
+            >
+          
+          </div>
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city"
+            ngModel
+            name="city"
+            placeholder="City"
+            >
+          </div>
+      
+          <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" class="form-control" id="country"
+            ngModel
+            name="country"
+            placeholder="country"
+            >
+          </div>
+          <div class="form-group">
+            <label for="post codr">Post Code</label>
+            <input type="text" class="form-control" id="postcode"
+            ngModel
+            name="postcode"
+            placeholder="postcode"
+            required
+            #PpostCode
+            >
+            <span class="help-block" *ngIf="PpostCode.invalid && PpostCode.touched" >required</span>
+          </div>
+          <p>Secondary Address</p> 
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"
+              [checked]="secondaryCheckBoxValue"
+              (click)="copyPrimaryAddressIntoSecondaryAddress()"
+              id="gridCheck">
+              <label class="form-check-label" for="gridCheck">
+                Check (if primary and seconday is same)
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="semail">Email address</label>
+            <input type="text" class="form-control" id="semail"
+            ngModel
+            name="semail"
+            [ngModel]="customer.secondaryAddress.email"
+            placeholder="Email address"
+            >
+          </div>
+      
+          <div class="form-group">
+            <label for="sphone">Phone Number</label>
+            <input type="text" class="form-control" id="sphone"
+            ngModel
+            name="sphone" 
+            [ngModel]="customer.secondaryAddress.phone"
+            placeholder="Phone Number">
+          </div>
+      
+          <div class="form-group">
+            <label for="saddress">Address</label>
+            <input type="text" class="form-control" id="saddress"
+            ngModel
+            name="saddress"
+            [ngModel]="customer.secondaryAddress.add"
+            placeholder="Address">
+          </div>
+          <div class="form-group">
+            <label for="scity">City</label>
+            <input type="text" class="form-control" id="scity"
+            ngModel
+            name="scity"
+            [ngModel]="customer.secondaryAddress.city"
+            placeholder="City">
+          </div>
+      
+          <div class="form-group">
+            <label for="scountry">Country</label>
+            <input type="text" class="form-control" id="scountry"
+            ngModel
+            name="scountry"
+            [ngModel]="customer.secondaryAddress.country"
+            placeholder="Country">
+          </div>
+          <div class="form-group">
+            <label for="spostcode">Post Code</label>
+            <input type="text" class="form-control" id="spostcode"
+            ngModel
+            name="spostcode"
+            [ngModel]="customer.secondaryAddress.post" placeholder="post code">
+          </div>
+      
+          <button class="btn btn-primary" type="submit" style="margin-right: 10px;" [disabled]="f.invalid">submit </button>
+          <button type="button" class="btn btn-warning" (click)="onClear(
+          )">Cancel</button>
+        </form>
+            
+      </div>
+    </div>
+    
+  </div>
+  <div class="row" *ngIf="submitted">
+  
+    <div class="col-xs-4">
+      <h4>Basic Information</h4>
+      <p>First Name: {{customer.basicInfo.firstname}}</p>
+      <p>Last Name: {{customer.basicInfo.lastname}}</p>
+      <p>Email Address: {{customer.basicInfo.email}}</p>
+      <p>Phone No: {{customer.basicInfo.phone}}</p> 
+  </div>
+  
+    <div class="col-xs-4">
+      <h4>Primary Address</h4>
+      <p>Email: {{customer.primaryAddress.email}}</p>
+      <p>Phone: {{customer.primaryAddress.phone}}</p>
+      <p>Address: {{customer.primaryAddress.add}}</p>
+      <p>City: {{customer.primaryAddress.city}}</p>
+      <p>Country: {{customer.primaryAddress.country}}</p>
+      <p>Post Code: {{customer.primaryAddress.post}}</p>
+  </div>
+  
+    <div class="col-xs-4">
+      <h4>Secondary Address</h4>
+      <p>Email: {{customer.secondaryAddress.email}}</p>
+      <p>Phone: {{customer.secondaryAddress.phone}}</p>
+      <p>Address: {{customer.secondaryAddress.add}}</p>
+      <p>City: {{customer.secondaryAddress.city}}</p>
+      <p>Country: {{customer.secondaryAddress.country}}</p>
+      <p>Post Code: {{customer.secondaryAddress.post}}</p>
+  </div>

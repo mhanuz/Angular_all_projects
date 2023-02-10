@@ -1,0 +1,19 @@
+.outer-div {
+    width: 600px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid rgb(217, 255, 0);
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 15px;
+}
+#defination{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: rgb(31, 3, 95);
+    font-style: oblique;
+}
+h4{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: xx-large;
+}

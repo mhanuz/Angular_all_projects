@@ -1,0 +1,31 @@
+.main{
+    height: auto;
+    width: auto;
+    grid-column: span;
+    display: flex;
+    justify-content: space-between;
+}
+
+.c{
+    height: 200px;
+    width: 200px;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: lightgreen;
+    border: 2px solid rebeccapurple;
+    border-radius: 10%;
+    
+}
+
+.c:hover{
+    background-color: blueviolet;
+    height: 150px;
+    width: 150px;
+}
+
+
+
+h1{
+    text-align: center;
+}
