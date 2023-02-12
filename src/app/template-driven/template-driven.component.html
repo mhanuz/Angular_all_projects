@@ -17,7 +17,6 @@
             >
             <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)">
               <span class="help-block" *ngIf="firstname.errors?.['required']">Name is required</span>
-              <span class="help-block" *ngIf="eventVal">Only Character</span>
               <span class="help-block" *ngIf="firstname.errors?.['minlength']">Atleast 4 Character</span>
               <span class="help-block" *ngIf="firstname.errors?.['maxlength']">Atmost 15 Character</span>
             </div>
@@ -31,12 +30,10 @@
             maxlength="15"
             placeholder="Last Name"
             required
-            lastname
             #lastname="ngModel"
             >
             <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
               <span class="help-block" *ngIf="lastname.errors?.['required']">Name is required</span>
-              <span class="help-block" *ngIf="eventVal">Only Character</span>
               <span class="help-block" *ngIf="lastname.errors?.['minlength']">Atleast 4 Character</span>
               <span class="help-block" *ngIf="lastname.errors?.['maxlength']">Atmost 15 Character</span>
             </div>
@@ -48,7 +45,6 @@
             ngModel
             name="email"
             placeholder="Email address"
-            email
             #emailAddress="ngModel"
             >
             <span class="help-block" *ngIf="emailAddress.errors?.email">Email is not valid</span>
@@ -61,9 +57,13 @@
             name="phone"
             placeholder="Phone Number"
             required
-            phone
+            pattern="(^(\+8801|8801|01|008801))[1|3-9]{1}(\d){8}$"
             #phone="ngModel">
-            <span class="help-block" *ngIf="!phone.valid && phone.touched">required field</span>
+            <span class="help-block" *ngIf="!phone.valid &&(phone.dirty || phone.touched)">
+              <span class="help-block" *ngIf="phone.errors?.['required']"> required field</span>
+              <span class="help-block" *ngIf="phone.errors?.['pattern']">Phone number should cointain 13 digit with 88</span>
+            </span>
+            
           </div>
       
           <p>Primary Addres</p> 
@@ -79,12 +79,10 @@
           </div>
           <div class="form-group">
             <label for="pemail">Email address</label>
-            <input type="email" class="form-control" id="pemail" 
+            <input type="pemail" class="form-control" id="pemail" 
             placeholder="Enter email"
             ngModel
             name="pemail"
-            [ngModel]="customer.primaryAddress.email"
-            pemail
             email="true"
             #pemailAddress="ngModel"
             >
@@ -98,49 +96,71 @@
             ngModel
             name="pphone"
             required
-            [ngModel]="customer.primaryAddress.phone"
-            pphone
+            pattern="(^(\+8801|8801|01|008801))[1|3-9]{1}(\d){8}$"
             #pphone="ngModel">
-            <span class="help-block" *ngIf="!pphone.valid && pphone.touched">required field</span>
+            <span class="help-block" *ngIf="!pphone.valid && (pphone.touched || pphone.dirty)">
+              <span class="help-block" *ngIf="pphone.errors?.['required']"> required field</span>
+              <span class="help-block" *ngIf="pphone.errors?.['pattern']">Phone number should cointain 13 digit with 88</span>
+            </span>
           </div>
       
       
           <div class="form-group">
-            <label for="address">Address</label>
-            <input type="text" class="form-control" id="address" 
+            <label for="paddress">Address</label>
+            <input type="text" class="form-control" id="paddress" 
             ngModel
-            name="address"
+            name="paddress"
             placeholder="Address"
+            required
+            #paddress="ngModel"
             >
-          
+            <span class="help-block" *ngIf="!paddress.valid && (paddress.touched || paddress.dirty)">
+              <span class="help-block" *ngIf="paddress.errors?.['required']"> required field</span>
+            </span>
           </div>
           <div class="form-group">
-            <label for="city">City</label>
-            <input type="text" class="form-control" id="city"
+            <label for="pcity">City</label>
+            <input type="text" class="form-control" id="pcity"
             ngModel
-            name="city"
+            name="pcity"
             placeholder="City"
+            required
+            #pcity="ngModel"
             >
+            <span class="help-block" *ngIf="!pcity.valid && (pcity.touched || pcity.dirty)">
+              <span class="help-block" *ngIf="pcity.errors?.['required']"> required field</span>
+            </span>
           </div>
       
           <div class="form-group">
             <label for="country">Country</label>
             <input type="text" class="form-control" id="country"
             ngModel
-            name="country"
+            name="pcountry"
             placeholder="country"
+            required
+            #pcountry="ngModel"
             >
+            <span class="help-block" *ngIf="!pcountry.valid && (pcountry.touched || pcountry.dirty)">
+              <span class="help-block" *ngIf="pcountry.errors?.['required']"> required field</span>
+            </span>
           </div>
           <div class="form-group">
-            <label for="post codr">Post Code</label>
-            <input type="text" class="form-control" id="postcode"
+            <label for="post code">Post Code</label>
+            <input type="text" class="form-control" id="ppostcode"
             ngModel
-            name="postcode"
+            name="ppostcode"
             placeholder="postcode"
+            minlength="5"
+            maxlength="5"
             required
-            #PpostCode
+            #postCode="ngModel"
             >
-            <span class="help-block" *ngIf="PpostCode.invalid && PpostCode.touched" >required</span>
+            <span class="help-block" *ngIf="postCode.invalid && (postCode.touched || postCode.dirty)" >
+              <span class="help-block" *ngIf="postCode.errors?.['required']"> required field</span>
+              <span class="help-block" *ngIf="postCode.errors?.['minlength']"> exact 5 digit</span>
+              
+            </span>
           </div>
           <p>Secondary Address</p> 
           <div class="form-group">
@@ -159,18 +179,26 @@
             <input type="text" class="form-control" id="semail"
             ngModel
             name="semail"
-            [ngModel]="customer.secondaryAddress.email"
             placeholder="Email address"
+            #secondaryEmail
             >
+            <span class="help-block" *ngIf="secondaryEmail.errors?.email">Email is not valid</span>
           </div>
       
           <div class="form-group">
             <label for="sphone">Phone Number</label>
-            <input type="text" class="form-control" id="sphone"
+            <input type="number" class="form-control" id="sphone"
             ngModel
             name="sphone" 
-            [ngModel]="customer.secondaryAddress.phone"
-            placeholder="Phone Number">
+            placeholder="Phone Number"
+            required
+            pattern="(^(\+8801|8801|01|008801))[1|3-9]{1}(\d){8}$"
+            #sphone="ngModel"
+            >
+            <span class="help-block" *ngIf="!sphone.valid && (sphone.touched || sphone.dirty)">
+              <span class="help-block" *ngIf="sphone.errors?.['required']"> required field</span>
+              <span class="help-block" *ngIf="sphone.errors?.['pattern']">Phone number should cointain 13 digit with 88</span>
+            </span>
           </div>
       
           <div class="form-group">
@@ -178,7 +206,6 @@
             <input type="text" class="form-control" id="saddress"
             ngModel
             name="saddress"
-            [ngModel]="customer.secondaryAddress.add"
             placeholder="Address">
           </div>
           <div class="form-group">
@@ -186,7 +213,6 @@
             <input type="text" class="form-control" id="scity"
             ngModel
             name="scity"
-            [ngModel]="customer.secondaryAddress.city"
             placeholder="City">
           </div>
       
@@ -195,7 +221,6 @@
             <input type="text" class="form-control" id="scountry"
             ngModel
             name="scountry"
-            [ngModel]="customer.secondaryAddress.country"
             placeholder="Country">
           </div>
           <div class="form-group">
@@ -203,7 +228,7 @@
             <input type="text" class="form-control" id="spostcode"
             ngModel
             name="spostcode"
-            [ngModel]="customer.secondaryAddress.post" placeholder="post code">
+            placeholder="post code">
           </div>
       
           <button class="btn btn-primary" type="submit" style="margin-right: 10px;" [disabled]="f.invalid">submit </button>
@@ -213,34 +238,5 @@
             
       </div>
     </div>
-    
-  </div>
-  <div class="row" *ngIf="submitted">
-  
-    <div class="col-xs-4">
-      <h4>Basic Information</h4>
-      <p>First Name: {{customer.basicInfo.firstname}}</p>
-      <p>Last Name: {{customer.basicInfo.lastname}}</p>
-      <p>Email Address: {{customer.basicInfo.email}}</p>
-      <p>Phone No: {{customer.basicInfo.phone}}</p> 
   </div>
   
-    <div class="col-xs-4">
-      <h4>Primary Address</h4>
-      <p>Email: {{customer.primaryAddress.email}}</p>
-      <p>Phone: {{customer.primaryAddress.phone}}</p>
-      <p>Address: {{customer.primaryAddress.add}}</p>
-      <p>City: {{customer.primaryAddress.city}}</p>
-      <p>Country: {{customer.primaryAddress.country}}</p>
-      <p>Post Code: {{customer.primaryAddress.post}}</p>
-  </div>
-  
-    <div class="col-xs-4">
-      <h4>Secondary Address</h4>
-      <p>Email: {{customer.secondaryAddress.email}}</p>
-      <p>Phone: {{customer.secondaryAddress.phone}}</p>
-      <p>Address: {{customer.secondaryAddress.add}}</p>
-      <p>City: {{customer.secondaryAddress.city}}</p>
-      <p>Country: {{customer.secondaryAddress.country}}</p>
-      <p>Post Code: {{customer.secondaryAddress.post}}</p>
-  </div>

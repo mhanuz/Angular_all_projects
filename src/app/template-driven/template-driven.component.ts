@@ -1,5 +1,38 @@
 import { Component,ViewChild, OnInit } from '@angular/core';
-import { NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
+
+
+interface Customer {
+  basicInfo: basicInfo;
+  primaryAddress: primaryAddress;
+  secondaryAddress: secondaryAddress;
+}
+
+interface  basicInfo{
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: number;
+  }
+
+interface  primaryAddress{
+    email: string;
+    phone: number;
+    address: string;
+    city: string;
+    country: string;
+    postcode: string;
+  }
+
+ interface secondaryAddress{
+    email: string;
+    phone: number;
+    address: string;
+    city: string;
+    country: string;
+    postcode: string; 
+  }
+
 
 @Component({
   selector: 'app-template-driven',
@@ -11,109 +44,105 @@ export class TemplateDrivenFormComponent implements OnInit {
 
   primaryCheckBoxValue: boolean; 
   secondaryCheckBoxValue: boolean;
-  submitted: boolean;
 
-  customer = {
-    basicInfo: {
-    firstname: '',
-    lastname:'',
-    email:'', 
-    phone:null
-  },
+  customer: Customer ={
+    basicInfo:{
+      firstName:'',
+      lastName: '',
+      email: '',
+      phone: null
 
-  primaryAddress:{
-  email: '',
-  phone: null,
-  add: '',
-  city:'',
-  country:'',
-  post: ''
-  },
+    },
+    primaryAddress:{
+      email: '',
+      phone: null,
+      address: '',
+      city:'',
+      country:'',
+      postcode: ''
+    },
 
-  secondaryAddress: {
+    secondaryAddress: {
     email: '',
     phone: null,
-    add: '',
+    address: '',
     city:'',
     country:'',
-    post: ''
+    postcode: ''
     }
-  } 
+  }; 
 
-  
  constructor(){
  }
 
  ngOnInit(): void {
-   this.primaryCheckBoxValue = false;
-   this.secondaryCheckBoxValue = false;
-   this.submitted = false;
+  this.primaryCheckBoxValue= false; 
+  this.secondaryCheckBoxValue= false;
+  this.createSignUpForm();
  }
   
 
   onSubmit(){
-    this.submitted = true;
-
     if(this.signupForm.valid) {
-      this.signupFormSubmission()
+      console.log(this.signupForm.value)
     }
-
     this.signupForm.reset();
   }
 
-   signupFormSubmission() {
-    this.customer.basicInfo.firstname = this.signupForm.value.firstname;
-    this.customer.basicInfo.lastname = this.signupForm.value.lastname;
+   createSignUpForm() {
+    
+    this.customer.basicInfo.firstName = this.signupForm.value.firstname;
+    this.customer.basicInfo.lastName = this.signupForm.value.lastname;
     this.customer.basicInfo.email = this.signupForm.value.email;
     this.customer.basicInfo.phone = this.signupForm.value.phone;
 
-    if(this.primaryCheckBoxValue === true){
+    if(this.primaryCheckBoxValue){
       this.primaryCheckBoxValue = false;
-      this.customer.primaryAddress.phone = this.signupForm.value.phone;
       this.customer.primaryAddress.email = this.signupForm.value.email;
-      this.customer.primaryAddress.add = this.signupForm.value.address;
-      this.customer.primaryAddress.city = this.signupForm.value.city;
-      this.customer.primaryAddress.country = this.signupForm.value.country;
-      this.customer.primaryAddress.post = this.signupForm.value.postcode;
+      this.customer.primaryAddress.phone = this.signupForm.value.phone;
+      this.customer.primaryAddress.address = this.signupForm.value.paddress;
+      this.customer.primaryAddress.city = this.signupForm.value.pcity;
+      this.customer.primaryAddress.country = this.signupForm.value.pcountry;
+      this.customer.primaryAddress.postcode = this.signupForm.value.ppostcode;
     }else{
       this.customer.primaryAddress.email = this.signupForm.value.pemail;
       this.customer.primaryAddress.phone = this.signupForm.value.pphone;
-      this.customer.primaryAddress.add = this.signupForm.value.address;
-      this.customer.primaryAddress.city = this.signupForm.value.city;
-      this.customer.primaryAddress.country = this.signupForm.value.country;
-      this.customer.primaryAddress.post = this.signupForm.value.postcode;
+      this.customer.primaryAddress.address = this.signupForm.value.paddress;
+      this.customer.primaryAddress.city = this.signupForm.value.pcity;
+      this.customer.primaryAddress.country = this.signupForm.value.pcountry;
+      this.customer.primaryAddress.postcode = this.signupForm.value.ppostcode;
     }
 
     
-    if(this.secondaryCheckBoxValue === true) {
+    if(this.secondaryCheckBoxValue) {
       this.secondaryCheckBoxValue = false
-      this.customer.secondaryAddress.email = this.signupForm.value.pemail;
-      this.customer.secondaryAddress.phone = this.signupForm.value.pphone;
-      this.customer.secondaryAddress.add = this.signupForm.value.address;
+      this.customer.secondaryAddress.email = this.signupForm.value.email;
+      this.customer.secondaryAddress.phone = this.signupForm.value.phone;
+      this.customer.secondaryAddress.address = this.signupForm.value.address;
       this.customer.secondaryAddress.city= this.signupForm.value.city;
       this.customer.secondaryAddress.country = this.signupForm.value.country;
-      this.customer.secondaryAddress.post = this.signupForm.value.postcode;
+      this.customer.secondaryAddress.postcode = this.signupForm.value.postcode;
     }else{
-      this.customer.secondaryAddress.email = this.signupForm.value.semail;
-      this.customer.secondaryAddress.phone = this.signupForm.value.sphone;
-      this.customer.secondaryAddress.add = this.signupForm.value.saddress;
-      this.customer.secondaryAddress.city= this.signupForm.value.scity;
-      this.customer.secondaryAddress.country = this.signupForm.value.scountry;
-      this.customer.secondaryAddress.post = this.signupForm.value.spostcode;
+      this.customer.secondaryAddress.email = this.signupForm.value.email;
+      this.customer.secondaryAddress.phone = this.signupForm.value.phone;
+      this.customer.secondaryAddress.address = this.signupForm.value.address;
+      this.customer.secondaryAddress.city= this.signupForm.value.city;
+      this.customer.secondaryAddress.country = this.signupForm.value.country;
+      this.customer.secondaryAddress.postcode = this.signupForm.value.postcode;
     }
    }
 
+
   copyBasicInfoIntoPrimaryAddress() {
     this.primaryCheckBoxValue = !this.primaryCheckBoxValue
+    // update the form
+    if(this.primaryCheckBoxValue) { 
+      this.signupForm.controls.pemail.setValue(this.signupForm.controls.email.value)
+      this.signupForm.controls.pphone.setValue(this.signupForm.controls.phone.value)
 
-    if(this.primaryCheckBoxValue) {
-      this.customer.primaryAddress.email=this.signupForm.value.email;
-      this.customer.primaryAddress.phone=this.signupForm.value.phone;
-      console.log(this.primaryCheckBoxValue);
-      
     }else{
-      this.customer.primaryAddress.email=''
-      this.customer.primaryAddress.phone=''
+      this.signupForm.controls.pemail.setValue('')
+      this.signupForm.controls.pphone.setValue(null)
     }
 
   }
@@ -122,19 +151,19 @@ export class TemplateDrivenFormComponent implements OnInit {
     this.secondaryCheckBoxValue = !this.secondaryCheckBoxValue
     
     if(this.secondaryCheckBoxValue){
-      this.customer.secondaryAddress.email = this.signupForm.value.pemail;
-      this.customer.secondaryAddress.phone = this.signupForm.value.pphone;
-      this.customer.secondaryAddress.add = this.signupForm.value.address;
-      this.customer.secondaryAddress.city= this.signupForm.value.city;
-      this.customer.secondaryAddress.country = this.signupForm.value.country;
-      this.customer.secondaryAddress.post = this.signupForm.value.postcode;
+      this.signupForm.controls.semail.patchValue(this.signupForm.controls.pemail.value)
+      this.signupForm.controls.sphone.patchValue(this.signupForm.controls.pphone.value)
+      this.signupForm.controls.saddress.patchValue(this.signupForm.controls.paddress.value)
+      this.signupForm.controls.scity.patchValue(this.signupForm.controls.pcity.value)
+      this.signupForm.controls.scountry.patchValue(this.signupForm.controls.pcountry.value)
+      this.signupForm.controls.spostcode.patchValue(this.signupForm.controls.ppostcode.value);
     }else{
-      this.customer.secondaryAddress.email = '';
-      this.customer.secondaryAddress.phone = '';
-      this.customer.secondaryAddress.add = '';
-      this.customer.secondaryAddress.city= '';
-      this.customer.secondaryAddress.country = '';
-      this.customer.secondaryAddress.post = '';
+      this.signupForm.controls.semail.patchValue('')
+      this.signupForm.controls.sphone.patchValue(null)
+      this.signupForm.controls.saddress.patchValue('')
+      this.signupForm.controls.scity.patchValue('')
+      this.signupForm.controls.scountry.patchValue('')
+      this.signupForm.controls.spostcode.patchValue('');
     }
     
   }
