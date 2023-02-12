@@ -45,7 +45,7 @@ export class ReactiveFormComponent implements OnInit{
   signupForm: FormGroup<CustomerInfo>;
   primaryAddressCheckBoxValue: boolean;
   secondaryAddressCheckBoxValue: boolean;
-  formValueList: any = [];
+  
 
   constructor( ){
   }
@@ -118,7 +118,6 @@ export class ReactiveFormComponent implements OnInit{
   onSubmit(){
     if (this.signupForm.valid) {
       console.log(this.signupForm.value);
-      this.formValueList.push(this.signupForm.value)
       this.primaryAddressCheckBoxValue=false;
       this.secondaryAddressCheckBoxValue=false;
 
