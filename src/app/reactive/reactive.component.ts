@@ -34,6 +34,32 @@ interface secondaryAddress{
   country: FormControl<string>,
   postcode: FormControl<string | number>
 }
+
+interface CustomerList{
+basicInfo: basicInformation,
+primaryAddress: primaryInformation,
+secondaryAddress: primaryInformation,
+hobbies: []
+}
+
+interface basicInformation{
+  firstname:string,
+  lastname:string,
+  email:string,
+  phone:number
+}
+
+interface primaryInformation{
+  email: string,
+  phone: number,
+  address: string,
+  city: string,
+  country: string,
+  postcode: string
+}
+
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './reactive.component.html',
@@ -45,7 +71,8 @@ export class ReactiveFormComponent implements OnInit{
   signupForm: FormGroup<CustomerInfo>;
   primaryAddressCheckBoxValue: boolean;
   secondaryAddressCheckBoxValue: boolean;
-  formValueList: any = [];
+  customerList: CustomerList;
+  submitted: boolean;
 
   constructor( ){
   }
@@ -54,6 +81,7 @@ export class ReactiveFormComponent implements OnInit{
   this.createCustomerForm();  
   this.primaryAddressCheckBoxValue = false;
   this.secondaryAddressCheckBoxValue = false;
+  this.submitted = false;
   }
 
   createCustomerForm() {
@@ -118,10 +146,10 @@ export class ReactiveFormComponent implements OnInit{
   onSubmit(){
     if (this.signupForm.valid) {
       console.log(this.signupForm.value);
-      this.formValueList.push(this.signupForm.value)
+      this.customerList.push(this.signupForm.value)
       this.primaryAddressCheckBoxValue=false;
       this.secondaryAddressCheckBoxValue=false;
-
+      this.submitted=true
       let hobbyArray = this.signupForm.get('hobbies') as FormArray;
       for (let i; 0<hobbyArray.length; i++){
       hobbyArray.removeAt(i)
