@@ -132,7 +132,6 @@ export class TemplateDrivenFormComponent implements OnInit {
 
   copyBasicInfoIntoPrimaryAddress() {
     this.primaryCheckBoxValue = !this.primaryCheckBoxValue
-    // update the form
     if(this.primaryCheckBoxValue) { 
       this.signupForm.controls.pemail.setValue(this.signupForm.controls.email.value)
       this.signupForm.controls.pphone.setValue(this.signupForm.controls.phone.value)
