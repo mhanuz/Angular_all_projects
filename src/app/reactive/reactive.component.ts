@@ -2,7 +2,7 @@ import { Component, OnInit  } from '@angular/core';
 import { Validators, FormArray,FormGroup, FormControl} from '@angular/forms';
 import { NameValidator } from './name-validator.directive';
 import { PhoneNumberValidation} from './phone-number-validator.directive'
-import { CustomerInfo, BasicInfo, PrimaryAddress, SecondaryAddress } from './customer-info-typeform';
+import { CustomerInfo, BasicInfo, PrimaryAddress, SecondaryAddress } from './customer-info-type';
 
 
 @Component({

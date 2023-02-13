@@ -1,6 +1,6 @@
 import { Component,ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { CustomerInfo } from './customer-info-typeform';
+import { CustomerInfo } from './customer-info-type';
 
 @Component({
   selector: 'app-template-driven',
