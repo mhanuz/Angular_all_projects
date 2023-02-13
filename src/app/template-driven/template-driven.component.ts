@@ -51,7 +51,6 @@ export class TemplateDrivenFormComponent implements OnInit {
       lastName: '',
       email: '',
       phone: null
-
     },
     primaryAddress:{
       email: '',
@@ -81,13 +80,11 @@ export class TemplateDrivenFormComponent implements OnInit {
   this.createSignUpForm();
  }
   
-
   onSubmit(){
     if(this.signupForm.valid) {
       console.log(this.signupForm.value)
       this.signupForm.reset();
-    }
-    
+    } 
   }
 
    createSignUpForm() {
@@ -114,7 +111,6 @@ export class TemplateDrivenFormComponent implements OnInit {
       this.customer.primaryAddress.postcode = this.signupForm.value.ppostcode;
     }
 
-    
     if(this.secondaryCheckBoxValue) {
       this.secondaryCheckBoxValue = false
       this.customer.secondaryAddress.email = this.signupForm.value.email;
@@ -145,7 +141,6 @@ export class TemplateDrivenFormComponent implements OnInit {
       this.signupForm.controls.pemail.setValue('')
       this.signupForm.controls.pphone.setValue(null)
     }
-
   }
 
   copyPrimaryAddressIntoSecondaryAddress() {
@@ -166,7 +161,6 @@ export class TemplateDrivenFormComponent implements OnInit {
       this.signupForm.controls.scountry.patchValue('')
       this.signupForm.controls.spostcode.patchValue('');
     }
-    
   }
 
   onClear(){
