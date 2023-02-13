@@ -29,26 +29,26 @@ export class ReactiveFormComponent implements OnInit{
   createCustomerForm() {
     this.signupForm = new FormGroup<CustomerInfo>({
         basicInfo:  new FormGroup<BasicInfo>({
-        firstName: new FormControl('',{validators: [Validators.required, NameValidator()]}),
-        lastName: new FormControl('',{validators: [Validators.required, NameValidator()]}),
-        email: new FormControl('',Validators.email),
-        phone: new FormControl(null, {validators: [Validators.required, PhoneNumberValidation()]} )
+          firstName: new FormControl('',{validators: [Validators.required, NameValidator()]}),
+          lastName: new FormControl('',{validators: [Validators.required, NameValidator()]}),
+          email: new FormControl('',Validators.email),
+          phone: new FormControl(null, {validators: [Validators.required, PhoneNumberValidation()]} )
      }),
         primaryAddress: new FormGroup<PrimaryAddress>({
-        email: new FormControl('',Validators.email ),
-        phone: new FormControl(null, {validators: [Validators.required, PhoneNumberValidation()]}),
-        address: new FormControl('',Validators.required),
-        city: new FormControl('',Validators.required),
-        country: new FormControl('',Validators.required),
-        postCode: new FormControl(null,Validators.required)
+          email: new FormControl('',Validators.email ),
+          phone: new FormControl(null, {validators: [Validators.required, PhoneNumberValidation()]}),
+          address: new FormControl('',Validators.required),
+          city: new FormControl('',Validators.required),
+          country: new FormControl('',Validators.required),
+          postCode: new FormControl(null,Validators.required)
      }),
         secondaryAddress: new FormGroup<SecondaryAddress>({
-        email: new FormControl('',Validators.email),
-        phone: new FormControl(null, {validators: [Validators.required, PhoneNumberValidation()]}),
-        address: new FormControl('', Validators.required),
-        city: new FormControl('', Validators.required),
-        country: new FormControl('',Validators.required),
-        postCode: new FormControl(null,Validators.required)
+          email: new FormControl('',Validators.email),
+          phone: new FormControl(null, {validators: [Validators.required, PhoneNumberValidation()]}),
+          address: new FormControl('', Validators.required),
+          city: new FormControl('', Validators.required),
+          country: new FormControl('',Validators.required),
+          postCode: new FormControl(null,Validators.required)
      }),
         hobbies: new FormArray([])
     })

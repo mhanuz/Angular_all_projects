@@ -21,6 +21,7 @@ export class TemplateDrivenFormComponent implements OnInit {
       email: '',
       phone: null
     },
+
     primaryAddress:{
       email: '',
       phone: null,
@@ -31,12 +32,12 @@ export class TemplateDrivenFormComponent implements OnInit {
     },
 
     secondaryAddress: {
-    email: '',
-    phone: null,
-    address: '',
-    city:'',
-    country:'',
-    postCode: ''
+      email: '',
+      phone: null,
+      address: '',
+      city:'',
+      country:'',
+      postCode: ''
     }
   }; 
 
@@ -60,41 +61,41 @@ export class TemplateDrivenFormComponent implements OnInit {
 
    createSignUpForm() {
     
-    this.customer.basicInfo.firstName = this.signupForm.value.firstname;
-    this.customer.basicInfo.lastName = this.signupForm.value.lastname;
-    this.customer.basicInfo.email = this.signupForm.value.email;
-    this.customer.basicInfo.phone = this.signupForm.value.phone;
+    this.customer.basicInfo.firstName = this.signupForm?.value.firstname;
+    this.customer.basicInfo.lastName = this.signupForm?.value.lastname;
+    this.customer.basicInfo.email = this.signupForm?.value.email;
+    this.customer.basicInfo.phone = this.signupForm?.value.phone;
 
     if(this.primaryCheckBoxValue){
-      this.customer.primaryAddress.email = this.signupForm.value.email;
-      this.customer.primaryAddress.phone = this.signupForm.value.phone;
-      this.customer.primaryAddress.address = this.signupForm.value.paddress;
-      this.customer.primaryAddress.city = this.signupForm.value.pcity;
-      this.customer.primaryAddress.country = this.signupForm.value.pcountry;
-      this.customer.primaryAddress.postCode = this.signupForm.value.ppostcode;
+      this.customer.primaryAddress.email = this.signupForm?.value.email;
+      this.customer.primaryAddress.phone = this.signupForm?.value.phone;
+      this.customer.primaryAddress.address = this.signupForm?.value.paddress;
+      this.customer.primaryAddress.city = this.signupForm?.value.pcity;
+      this.customer.primaryAddress.country = this.signupForm?.value.pcountry;
+      this.customer.primaryAddress.postCode = this.signupForm?.value.ppostcode;
     }else{
-      this.customer.primaryAddress.email = this.signupForm.value.pemail;
-      this.customer.primaryAddress.phone = this.signupForm.value.pphone;
-      this.customer.primaryAddress.address = this.signupForm.value.paddress;
-      this.customer.primaryAddress.city = this.signupForm.value.pcity;
-      this.customer.primaryAddress.country = this.signupForm.value.pcountry;
-      this.customer.primaryAddress.postCode = this.signupForm.value.ppostcode;
+      this.customer.primaryAddress.email = this.signupForm?.value.pemail;
+      this.customer.primaryAddress.phone = this.signupForm?.value.pphone;
+      this.customer.primaryAddress.address = this.signupForm?.value.paddress;
+      this.customer.primaryAddress.city = this.signupForm?.value.pcity;
+      this.customer.primaryAddress.country = this.signupForm?.value.pcountry;
+      this.customer.primaryAddress.postCode = this.signupForm?.value.ppostcode;
     }
 
     if(this.secondaryCheckBoxValue) {
-      this.customer.secondaryAddress.email = this.signupForm.value.email;
-      this.customer.secondaryAddress.phone = this.signupForm.value.phone;
-      this.customer.secondaryAddress.address = this.signupForm.value.address;
-      this.customer.secondaryAddress.city= this.signupForm.value.city;
-      this.customer.secondaryAddress.country = this.signupForm.value.country;
-      this.customer.secondaryAddress.postCode = this.signupForm.value.postcode;
+      this.customer.secondaryAddress.email = this.signupForm?.value.pemail;
+      this.customer.secondaryAddress.phone = this.signupForm?.value.pphone;
+      this.customer.secondaryAddress.address = this.signupForm?.value.paddress;
+      this.customer.secondaryAddress.city= this.signupForm?.value.pcity;
+      this.customer.secondaryAddress.country = this.signupForm?.value.pcountry;
+      this.customer.secondaryAddress.postCode = this.signupForm?.value.ppostcode;
     }else{
-      this.customer.secondaryAddress.email = this.signupForm.value.email;
-      this.customer.secondaryAddress.phone = this.signupForm.value.phone;
-      this.customer.secondaryAddress.address = this.signupForm.value.address;
-      this.customer.secondaryAddress.city= this.signupForm.value.city;
-      this.customer.secondaryAddress.country = this.signupForm.value.country;
-      this.customer.secondaryAddress.postCode = this.signupForm.value.postcode;
+      this.customer.secondaryAddress.email = this.signupForm?.value.semail;
+      this.customer.secondaryAddress.phone = this.signupForm?.value.sphone;
+      this.customer.secondaryAddress.address = this.signupForm?.value.saddress;
+      this.customer.secondaryAddress.city= this.signupForm?.value.scity;
+      this.customer.secondaryAddress.country = this.signupForm?.value.scountry;
+      this.customer.secondaryAddress.postCode = this.signupForm?.value.spostcode;
     }
    }
 
@@ -102,12 +103,12 @@ export class TemplateDrivenFormComponent implements OnInit {
   copyBasicInfoIntoPrimaryAddress() {
     this.primaryCheckBoxValue = !this.primaryCheckBoxValue
     if(this.primaryCheckBoxValue) { 
-      this.signupForm.controls.pemail.setValue(this.signupForm.controls.email.value)
-      this.signupForm.controls.pphone.setValue(this.signupForm.controls.phone.value)
+      this.signupForm.controls.pemail.patchValue(this.signupForm.controls.email.value)
+      this.signupForm.controls.pphone.patchValue(this.signupForm.controls.phone.value)
 
     }else{
-      this.signupForm.controls.pemail.setValue('')
-      this.signupForm.controls.pphone.setValue(null)
+      this.signupForm.controls.pemail.patchValue('')
+      this.signupForm.controls.pphone.patchValue(null)
     }
   }
 
