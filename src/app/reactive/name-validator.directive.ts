@@ -5,8 +5,9 @@ export function NameValidator(): ValidatorFn {
         if(control.value !== null){
             if(control.value.length >= 11) {
                 return {'NameNotAllowed': true}
-            }
+            }else{
             return null;
+            }
         }else{
             return null
         }
