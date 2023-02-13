@@ -121,7 +121,7 @@ export class ReactiveFormComponent implements OnInit{
       this.primaryAddressCheckBoxValue=false;
       this.secondaryAddressCheckBoxValue=false;
       let hobbyArray = this.signupForm.get('hobbies') as FormArray;
-      for (let i; 0<hobbyArray.length; i++){
+      for (let i=0; i<hobbyArray.length; i++){
       hobbyArray.removeAt(i)
       this.signupForm.reset();
     }  
