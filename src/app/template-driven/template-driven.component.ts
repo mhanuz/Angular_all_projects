@@ -85,8 +85,9 @@ export class TemplateDrivenFormComponent implements OnInit {
   onSubmit(){
     if(this.signupForm.valid) {
       console.log(this.signupForm.value)
+      this.signupForm.reset();
     }
-    this.signupForm.reset();
+    
   }
 
    createSignUpForm() {
