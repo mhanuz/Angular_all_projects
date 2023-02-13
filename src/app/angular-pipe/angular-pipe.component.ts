@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-
 @Component({
   selector: 'app-pipe',
   templateUrl: './angular-pipe.component.html',
