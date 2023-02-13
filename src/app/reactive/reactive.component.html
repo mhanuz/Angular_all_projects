@@ -6,28 +6,28 @@
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div formGroupName= 'basicInfo'>
           <div class="form-group">
-            <label for = "firstname"> First Name </label>
+            <label for = "firstName"> First Name </label>
             <input type="text" 
             class="form-control"
-            id="firstname"
-            formControlName="firstname"
+            id="firstName"
+            formControlName="firstName"
             >
             <!-- ? is used to check is the value null -->
-            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.firstname.invalid && (signupForm.controls.basicInfo.controls.firstname.dirty || signupForm.controls.basicInfo.controls.firstname.touched)">
-            <span *ngIf="signupForm.controls.basicInfo.controls.firstname.errors?.required">Name is required</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.firstname.errors?.NameNotAllowed">Name Maximum Length is 10</span>
+            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.firstName.invalid && (signupForm.controls.basicInfo.controls.firstName.dirty || signupForm.controls.basicInfo.controls.firstName.touched)">
+            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.required">Name is required</span>
+            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.NameNotAllowed">Name Maximum Length is 10</span>
             </span>
           </div>
           <div class="form-group">
-            <label for="lastname">Last Name</label>
+            <label for="lastName">Last Name</label>
             <input type="text"
             class="form-control"
-            id="lastname"
-            formControlName="lastname"
+            id="lastName"
+            formControlName="lastName"
             >
-            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastname.invalid && (signupForm.controls.basicInfo.controls.lastname.dirty || signupForm.controls.basicInfo.controls.lastname.touched)">
-              <span *ngIf="signupForm.controls.basicInfo.controls.lastname.errors?.required">Name is required</span>
-              <span *ngIf="signupForm.controls.basicInfo.controls.lastname.errors?.NameNotAllowed">Name Maximum Length is 10</span>
+            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.invalid && (signupForm.controls.basicInfo.controls.lastName.dirty || signupForm.controls.basicInfo.controls.lastName.touched)">
+              <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.required">Name is required</span>
+              <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.NameNotAllowed">Name Maximum Length is 10</span>
               </span>
           </div>
            <div class="form-group">
@@ -121,13 +121,13 @@
                   </span>
           </div>
           <div class="form-group">
-            <label for="postcode">Post Code</label>
+            <label for="postCode">Post Code</label>
             <input type="number"
-            id="postcode"
+            id="postCode"
             class="form-control"
-            formControlName="postcode">
-            <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.postcode.invalid &&
-                  (signupForm.controls.primaryAddress.controls.postcode.dirty || signupForm.controls.primaryAddress.controls.postcode.touched)">required
+            formControlName="postCode">
+            <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.postCode.invalid &&
+                  (signupForm.controls.primaryAddress.controls.postCode.dirty || signupForm.controls.primaryAddress.controls.postCode.touched)">required
                   </span>
           </div>
         </div>
@@ -198,13 +198,13 @@
                   </span>
           </div>
           <div class="form-group">
-            <label for="postcode">Post Code</label>
+            <label for="postCode">Post Code</label>
             <input type="number"
-            id="postcode"
+            id="postCode"
             class="form-control"
-            formControlName="postcode">
-            <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.postcode.invalid &&
-                  (signupForm.controls.secondaryAddress.controls.postcode.dirty || signupForm.controls.secondaryAddress.controls.postcode.touched)">required
+            formControlName="postCode">
+            <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.postCode.invalid &&
+                  (signupForm.controls.secondaryAddress.controls.postCode.dirty || signupForm.controls.secondaryAddress.controls.postCode.touched)">required
                   </span>
           </div>
         </div>
