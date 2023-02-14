@@ -13,7 +13,6 @@ export class TemplateDrivenFormComponent implements OnInit {
   primaryAddressCheckBoxValue: boolean; 
   secondaryAddressCheckBoxValue: boolean;
 
-
   customer: CustomerInfo ={
     basicInfo:{
       firstName:'',
@@ -45,17 +44,15 @@ export class TemplateDrivenFormComponent implements OnInit {
  }
 
  ngOnInit(): void {
-  this.primaryAddressCheckBoxValue= false; 
-  this.secondaryAddressCheckBoxValue= false;
-  this.createSignUpForm();
+   this.primaryAddressCheckBoxValue= false; 
+   this.secondaryAddressCheckBoxValue= false;
+   this.createSignUpForm();
  }
   
   onSubmit(){
     if(this.signupForm.valid) {
       console.log(this.signupForm.value)
-      this.primaryAddressCheckBoxValue=false
-      this.secondaryAddressCheckBoxValue=false
-      this.signupForm.reset();
+      this.onClear();
     } 
   }
 
@@ -133,6 +130,8 @@ export class TemplateDrivenFormComponent implements OnInit {
   }
 
   onClear(){
+    this.primaryAddressCheckBoxValue=false
+    this.secondaryAddressCheckBoxValue=false
     this.signupForm.reset()
   }
 

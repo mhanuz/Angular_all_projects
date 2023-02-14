@@ -16,9 +16,9 @@
             #firstname="ngModel"
           >
             <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)">
-              <span class="help-block" *ngIf="firstname.errors?.['required']">Name is required</span>
-              <span class="help-block" *ngIf="firstname.errors?.['minlength']">Atleast 4 Character</span>
-              <span class="help-block" *ngIf="firstname.errors?.['maxlength']">Atmost 15 Character</span>
+              <span class="help-block" *ngIf="firstname.errors?.['required']">Name is required.</span>
+              <span class="help-block" *ngIf="firstname.errors?.['minlength']">Atleast 4 Character.</span>
+              <span class="help-block" *ngIf="firstname.errors?.['maxlength']">Atmost 15 Character.</span>
             </div>
           </div>
         <div class="form-group">
@@ -33,9 +33,9 @@
             #lastname="ngModel"
           >
             <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)">
-              <span class="help-block" *ngIf="lastname.errors?.['required']">Name is required</span>
-              <span class="help-block" *ngIf="lastname.errors?.['minlength']">Atleast 4 Character</span>
-              <span class="help-block" *ngIf="lastname.errors?.['maxlength']">Atmost 15 Character</span>
+              <span class="help-block" *ngIf="lastname.errors?.['required']">Name is required.</span>
+              <span class="help-block" *ngIf="lastname.errors?.['minlength']">Atleast 4 Character.</span>
+              <span class="help-block" *ngIf="lastname.errors?.['maxlength']">Atmost 15 Character.</span>
             </div>
         </div>
         <div class="form-group">
@@ -59,8 +59,8 @@
             #phone="ngModel"
           >
           <span class="help-block" *ngIf="!phone.valid &&(phone.dirty || phone.touched)">
-            <span class="help-block" *ngIf="phone.errors?.['required']"> required field</span>
-            <span class="help-block" *ngIf="phone.errors?.['pattern']">Phone number should cointain 13 digit with 88</span>
+            <span class="help-block" *ngIf="phone.errors?.['required']"> Required field.</span>
+            <span class="help-block" *ngIf="phone.errors?.['pattern']">Phone number should cointain 13 digit with 88.</span>
           </span>
         </div>
         <p>Primary Addres</p> 
@@ -71,7 +71,7 @@
                (click)="copyBasicInfoIntoPrimaryAddress()"
             >
             <label class="form-check-label" for="gridCheck">
-              Check (if phone and email is same)
+              Check (if phone and email is same).
             </label>
           </div>
         </div>
@@ -84,7 +84,7 @@
             email="true"
             #pemailAddress="ngModel"
           >
-          <span class="help-block" *ngIf="pemailAddress.errors?.email">Email is not valid</span>
+          <span class="help-block" *ngIf="pemailAddress.errors?.email">Email is not valid.</span>
         </div>
         <div class="form-group">
           <label for="pphone">Phone Number</label>
@@ -97,8 +97,8 @@
             #pphone="ngModel"
           >
           <span class="help-block" *ngIf="!pphone.valid && (pphone.touched || pphone.dirty)">
-            <span class="help-block" *ngIf="pphone.errors?.['required']"> required field</span>
-            <span class="help-block" *ngIf="pphone.errors?.['pattern']">Phone number should cointain 13 digit with 88</span>
+            <span class="help-block" *ngIf="pphone.errors?.['required']"> Required field.</span>
+            <span class="help-block" *ngIf="pphone.errors?.['pattern']">Phone number should cointain 13 digit with 88.</span>
           </span>
         </div>
         <div class="form-group">
@@ -111,7 +111,7 @@
             #paddress="ngModel"
           >
           <span class="help-block" *ngIf="!paddress.valid && (paddress.touched || paddress.dirty)">
-            <span class="help-block" *ngIf="paddress.errors?.['required']"> required field</span>
+            <span class="help-block" *ngIf="paddress.errors?.['required']"> Required field.</span>
           </span>
         </div>
         <div class="form-group">
@@ -124,7 +124,7 @@
             #pcity="ngModel"
           >
           <span class="help-block" *ngIf="!pcity.valid && (pcity.touched || pcity.dirty)">
-            <span class="help-block" *ngIf="pcity.errors?.['required']"> required field</span>
+            <span class="help-block" *ngIf="pcity.errors?.['required']"> Required field.</span>
           </span>
         </div>
         <div class="form-group">
@@ -137,7 +137,7 @@
             #pcountry="ngModel"
           >
           <span class="help-block" *ngIf="!pcountry.valid && (pcountry.touched || pcountry.dirty)">
-            <span class="help-block" *ngIf="pcountry.errors?.['required']"> required field</span>
+            <span class="help-block" *ngIf="pcountry.errors?.['required']"> Required field.</span>
           </span>
         </div>
         <div class="form-group">
@@ -152,17 +152,18 @@
             #postCode="ngModel"
           >
           <span class="help-block" *ngIf="postCode.invalid && (postCode.touched || postCode.dirty)" >
-            <span class="help-block" *ngIf="postCode.errors?.['required']"> required field</span>
-            <span class="help-block" *ngIf="postCode.errors?.['minlength']"> exact 5 digit</span>
+            <span class="help-block" *ngIf="postCode.errors?.['required']"> Required field.</span>
+            <span class="help-block" *ngIf="postCode.errors?.['minlength']">Exact 5 digits.</span>
           </span>
         </div>
         <p>Secondary Address</p> 
         <div class="form-group">
           <div class="form-check">
             <input class="form-check-input" type="checkbox"
-            [checked]="secondaryAddressCheckBoxValue"
-            (click)="copyPrimaryAddressIntoSecondaryAddress()"
-            id="gridCheck">
+              [checked]="secondaryAddressCheckBoxValue"
+              (click)="copyPrimaryAddressIntoSecondaryAddress()"
+              id="gridCheck"
+            >
             <label class="form-check-label" for="gridCheck">
               Check (if primary and seconday is same)
             </label>
@@ -176,7 +177,7 @@
           placeholder="Email address"
           #secondaryEmail
           >
-          <span class="help-block" *ngIf="secondaryEmail.errors?.email">Email is not valid</span>
+          <span class="help-block" *ngIf="secondaryEmail.errors?.email">Email is not valid.</span>
         </div>
         <div class="form-group">
           <label for="sphone">Phone Number</label>
@@ -189,8 +190,8 @@
             #sphone="ngModel"
           >
           <span class="help-block" *ngIf="!sphone.valid && (sphone.touched || sphone.dirty)">
-            <span class="help-block" *ngIf="sphone.errors?.['required']"> required field</span>
-            <span class="help-block" *ngIf="sphone.errors?.['pattern']">Phone number should cointain 13 digit with 88</span>
+            <span class="help-block" *ngIf="sphone.errors?.['required']"> Required field</span>
+            <span class="help-block" *ngIf="sphone.errors?.['pattern']">Phone number should cointain 13 digit with 88.</span>
           </span>
         </div>
         <div class="form-group">
@@ -224,7 +225,7 @@
             placeholder="post code"
           >
         </div>
-          <button class="btn btn-primary" type="submit" style="margin-right: 10px;" [disabled]="f.invalid">submit </button>
+          <button class="btn btn-primary" type="submit" style="margin-right: 10px;" [disabled]="f.invalid">Submit </button>
           <button type="button" class="btn btn-warning" (click)="onClear(
           )">Cancel</button>
       </form>
