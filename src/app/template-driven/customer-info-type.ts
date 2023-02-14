@@ -7,12 +7,12 @@ export interface CustomerInfo {
 export interface  BasicInfo{
       firstName: string;
       lastName: string;
-      email: string;
+      email?: string;
       phone: number;
     }
   
 export  interface  PrimaryAddress{
-      email: string;
+      email?: string;
       phone: number;
       address: string;
       city: string;
@@ -21,7 +21,7 @@ export  interface  PrimaryAddress{
     }
   
 export  interface SecondaryAddress{
-      email: string;
+      email?: string;
       phone: number;
       address: string;
       city: string;
