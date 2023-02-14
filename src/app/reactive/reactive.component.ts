@@ -29,8 +29,8 @@ export class ReactiveFormComponent implements OnInit{
   createCustomerForm() {
     this.signupForm = new FormGroup<CustomerInfo>({
         basicInfo:  new FormGroup<BasicInfo>({
-          firstName: new FormControl('',{validators: [Validators.required, NameValidator()]}),
-          lastName: new FormControl('',{validators: [Validators.required, NameValidator()]}),
+          firstName: new FormControl('',{validators: [Validators.required,Validators.minLength(4), Validators.maxLength(10), NameValidator()]}),
+          lastName: new FormControl('',{validators: [Validators.required,Validators.minLength(4), Validators.maxLength(10), NameValidator()]}),
           email: new FormControl('',Validators.email),
           phone: new FormControl(null, {validators: [Validators.required, PhoneNumberValidation()]} )
      }),
