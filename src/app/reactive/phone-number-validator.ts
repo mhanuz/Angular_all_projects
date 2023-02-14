@@ -9,8 +9,8 @@ export function PhoneNumberValidation(): ValidatorFn {
             }else{
                 return null
             }     
-    }else{
-        return null
+        }else{
+            return null
+        }
     }
-}
 }

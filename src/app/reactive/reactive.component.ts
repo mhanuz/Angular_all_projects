@@ -1,7 +1,7 @@
 import { Component, OnInit  } from '@angular/core';
 import { Validators, FormArray,FormGroup, FormControl} from '@angular/forms';
-import { NameValidator } from './name-validator.directive';
-import { PhoneNumberValidation} from './phone-number-validator.directive'
+import { NameValidator } from './name-validator';
+import { PhoneNumberValidation} from './phone-number-validator'
 import { CustomerInfo, BasicInfo, PrimaryAddress, SecondaryAddress } from './customer-info-type';
 
 
@@ -21,9 +21,9 @@ export class ReactiveFormComponent implements OnInit{
   }
 // ngOnInit: execute the code inside ngOnInit after class instantiated
   ngOnInit() {
-  this.createCustomerForm();  
-  this.primaryAddressCheckBoxValue = false;
-  this.secondaryAddressCheckBoxValue = false;
+    this.createCustomerForm();  
+    this.primaryAddressCheckBoxValue = false;
+    this.secondaryAddressCheckBoxValue = false;
   }
 
   createCustomerForm() {
@@ -88,13 +88,7 @@ export class ReactiveFormComponent implements OnInit{
   onSubmit(){
     if (this.signupForm.valid) {
       console.log(this.signupForm.value);
-      this.primaryAddressCheckBoxValue=false;
-      this.secondaryAddressCheckBoxValue=false;
-      let hobbyArray = this.signupForm.get('hobbies') as FormArray;
-      for (let i=0; i<hobbyArray.length; i++){
-      hobbyArray.removeAt(i)
-      this.signupForm.reset();
-    }  
+      this.onClear();
     }
   }
 
@@ -104,6 +98,9 @@ export class ReactiveFormComponent implements OnInit{
   }
 
   onClear(){
+    this.primaryAddressCheckBoxValue=false;
+    this.secondaryAddressCheckBoxValue=false;
+    this.signupForm.controls.hobbies.clear(); // reset form array 
     this.signupForm.reset();
   }
 }
