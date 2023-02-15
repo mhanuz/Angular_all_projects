@@ -15,10 +15,10 @@
             <!-- ? is used to check is the value null -->
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.firstName.invalid && (signupForm.controls.basicInfo.controls.firstName.dirty || signupForm.controls.basicInfo.controls.firstName.touched)">
             <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.required">Name is required</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.DotNotation">Don't add title in the name</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.minlength"> At least 4 char</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.maxlength"> At most 11 char</span>
+            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.minlength"> At least 4 character</span>
+            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.maxlength"> At most 11 character</span>
             </span>
+            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.DotNotation">Don't add title in the name</span>
           </div>
           <div class="form-group">
             <label for="lastName">Last Name</label>
@@ -29,10 +29,10 @@
             >
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.invalid && (signupForm.   controls.basicInfo.controls.lastName.dirty || signupForm.controls.basicInfo.controls.lastName.touched)">
             <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.required">Name is required.</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.DotNotation">Don't add title in the  name</span>
             <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.minlength"> At least 4 char</span>
             <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.maxlength"> At most 11 char</span>
             </span>
+            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.DotNotation">Don't add title in the  name</span>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
