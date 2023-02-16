@@ -17,7 +17,8 @@ export class ReactiveFormComponent implements OnInit, OnChanges{
   signupForm: FormGroup<CustomerInfo>;
   primaryAddressCheckBoxValue: boolean;
   secondaryAddressCheckBoxValue: boolean;
-  isDisable: boolean;
+  isDisablePrimaryAddress: boolean;
+  isDisableSecondaryAddress: boolean;
   
   constructor( ){
   }
@@ -30,7 +31,8 @@ export class ReactiveFormComponent implements OnInit, OnChanges{
     this.createCustomerForm();  
     this.primaryAddressCheckBoxValue = false;
     this.secondaryAddressCheckBoxValue = false;
-    this.isDisable=false
+    this.isDisablePrimaryAddress=false;
+    this.isDisableSecondaryAddress=false;
   }
 
   createCustomerForm() {
@@ -43,11 +45,11 @@ export class ReactiveFormComponent implements OnInit, OnChanges{
      }),
         primaryAddress: new FormGroup<PrimaryAddress>({
           email: new FormControl('',Validators.email ),
-          phone: new FormControl(null, {validators: [Validators.required, PhoneNumberValidation()]}),
+          phone: new FormControl(null, {validators: [Validators.required, PhoneNumberValidation(), DigitCheckValidation()]}),
           address: new FormControl('',Validators.required),
           city: new FormControl('',Validators.required),
           country: new FormControl('',Validators.required),
-          postCode: new FormControl(null,Validators.required)
+          postCode: new FormControl(null,{validators: [Validators.required, Validators.maxLength(5)]})
      }),
         secondaryAddress: new FormGroup<SecondaryAddress>({
           email: new FormControl('',Validators.email),
@@ -63,17 +65,15 @@ export class ReactiveFormComponent implements OnInit, OnChanges{
   updatePrimaryCheckBox(){
     this.primaryAddressCheckBoxValue=!this.primaryAddressCheckBoxValue;
     if(this.primaryAddressCheckBoxValue){
-      this.isDisable=!this.isDisable;
-      console.log("is disable: ", this.isDisable);
+      this.isDisablePrimaryAddress=!this.isDisablePrimaryAddress; 
     }else{
-      this.isDisable=!this.isDisable;
-      console.log("is disable: ", this.isDisable);
+      this.isDisablePrimaryAddress=!this.isDisablePrimaryAddress;
     }
     this.copyBasicInfoIntoPrimaryAddress()
   }
 
-  copyBasicInfoIntoPrimaryAddress() {;
-      
+  copyBasicInfoIntoPrimaryAddress() {
+    
      if (this.signupForm.controls.basicInfo.controls.email.valid && this.signupForm.controls.basicInfo.controls.phone.valid && this.primaryAddressCheckBoxValue){
       this.signupForm.controls.primaryAddress.controls.email.setValue(this.signupForm.controls.basicInfo.controls.email.value)
       this.signupForm.controls.primaryAddress.controls.phone.setValue(this.signupForm.controls.basicInfo.controls.phone.value)
@@ -88,16 +88,26 @@ export class ReactiveFormComponent implements OnInit, OnChanges{
     
   }
     
+  updateSecondaryCheckBox(){
+    this.secondaryAddressCheckBoxValue=!this.secondaryAddressCheckBoxValue;
+    if(this.secondaryAddressCheckBoxValue){
+      this.isDisableSecondaryAddress=!this.isDisableSecondaryAddress
+    }else{
+      this.isDisableSecondaryAddress=!this.isDisableSecondaryAddress;
+    }
+    this.copyPrimaryAddessIntoSecondaryAddress()
 
+  }
   copyPrimaryAddessIntoSecondaryAddress() {
-    this.secondaryAddressCheckBoxValue=!this.secondaryAddressCheckBoxValue
-    if (this.secondaryAddressCheckBoxValue) {
+    if (this.secondaryAddressCheckBoxValue && this.signupForm.controls.primaryAddress.valid) {
         this.signupForm.controls.secondaryAddress.controls.email.setValue(this.signupForm.controls.primaryAddress.controls.email.value);
         this.signupForm.controls.secondaryAddress.controls.phone.setValue(this.signupForm.controls.primaryAddress.controls.phone.value);
         this.signupForm.controls.secondaryAddress.controls.address.setValue(this.signupForm.controls.primaryAddress.controls.address.value);
         this.signupForm.controls.secondaryAddress.controls.city.setValue(this.signupForm.controls.primaryAddress.controls.city.value);
         this.signupForm.controls.secondaryAddress.controls.country.setValue(this.signupForm.controls.primaryAddress.controls.country.value);
         this.signupForm.controls.secondaryAddress.controls.postCode.setValue(this.signupForm.controls.primaryAddress.controls.postCode.value);
+
+
     } else {
         this.signupForm.controls.secondaryAddress.controls.email.setValue("");
         this.signupForm.controls.secondaryAddress.controls.phone.setValue(null);
