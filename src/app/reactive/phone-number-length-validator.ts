@@ -7,7 +7,7 @@ export function PhoneNumberValidation(): ValidatorFn {
             if(control.value.toString().length != 11){
                 return {"NotElevenDigit": true}
             }else{
-                return null
+               return null
             }     
         }else{
             return null

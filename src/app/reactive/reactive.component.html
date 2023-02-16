@@ -16,7 +16,7 @@
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.firstName.invalid && (signupForm.controls.basicInfo.controls.firstName.dirty || signupForm.controls.basicInfo.controls.firstName.touched)">
             <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.required">Name is required</span>
             <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.minlength"> At least 4 character</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.maxlength"> At most 11 character</span>
+            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.maxlength"> At most 10 character</span>
             </span>
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.DotNotation">Don't add title in the name</span>
           </div>
@@ -29,8 +29,8 @@
             >
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.invalid && (signupForm.   controls.basicInfo.controls.lastName.dirty || signupForm.controls.basicInfo.controls.lastName.touched)">
             <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.required">Name is required.</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.minlength"> At least 4 char</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.maxlength"> At most 11 char</span>
+            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.minlength"> At least 4 character</span>
+            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.maxlength"> At most 10 character</span>
             </span>
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.DotNotation">Don't add title in the  name</span>
           </div>
@@ -40,6 +40,7 @@
             id="email"
             class="form-control"
             formControlName="email"
+            (keyup)="copyBasicInfoIntoPrimaryAddress()"
             >
             <span 
             *ngIf="signupForm.controls.basicInfo.controls.email.errors"
@@ -50,15 +51,17 @@
             <input type="text"
             id="phone"
             class="form-control"
-              ormControlName="phone">
+            formControlName="phone"
+            (keyup)="copyBasicInfoIntoPrimaryAddress()"
+              >
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.invalid && (signupForm.controls. basicInfo.controls.phone.dirty || signupForm.controls.basicInfo.controls.phone.touched)">
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.errors?.required">Phone no is required.</span>
+            </span>
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.errors?.NotElevenDigit">
-            Phone number should be 11 digit.
+              Phone number should be 11 digit.
             </span>
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.errors?.NotADigit">
-              String is not allowed.
-            </span>
+                Only digits are allowed
             </span>
           </div>
         </div>
@@ -67,11 +70,25 @@
           <div class="form-check">
             <input class="form-check-input" type="checkbox"
             [checked]="primaryAddressCheckBoxValue"
-            (click)="copyBasicInfoIntoPrimaryAddress()"
+            (click)="updatePrimaryCheckBox()"
             value="" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault" style="margin-left: 10px;">
                 If email and phone no are same.
             </label>
+            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.email.invalid  &&
+                    (signupForm.controls.basicInfo.touched || signupForm.controls.basicInfo.dirty) ">
+                  <span class="help-block" *ngIf="primaryAddressCheckBoxValue">
+                    Please enter a valid email address, otherwise your email will not set primary address form.
+                  </span>
+              </span>
+
+              <span class="help-block" *ngIf="(signupForm.controls.basicInfo.controls.phone.invalid) &&
+                    (signupForm.controls.basicInfo.touched || signupForm.controls.basicInfo.dirty) ">
+                  <span class="help-block" *ngIf="primaryAddressCheckBoxValue">
+                    Please enter a valid phone number, otherwise your phone number will not set primary address form.
+                  </span>
+              </span>
+              
           </div>
           <div class="form-group">
             <label for="email">Email</label>
@@ -79,6 +96,7 @@
             id="email"
             class="form-control"
             formControlName="email"
+            [readonly]="isDisable"
             >
             <span 
             *ngIf="signupForm.controls.primaryAddress.controls.email.errors"
@@ -89,7 +107,9 @@
             <input type="number"
             id="phone"
             class="form-control"
-            formControlName="phone">
+            formControlName="phone"
+            [readonly]="isDisable"
+            >
             <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.phone.invalid &&      (signupForm.controls.primaryAddress.controls.phone.dirty || signupForm.controls.primaryAddress.controls.phone.touched)">
               <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.phone.errors?.required">required field</span>
               <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.phone.errors?.NotaDigit">

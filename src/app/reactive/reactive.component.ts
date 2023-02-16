@@ -1,7 +1,8 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges  } from '@angular/core';
 import { Validators, FormArray,FormGroup, FormControl} from '@angular/forms';
 import { NameValidator } from './name-validator';
-import { PhoneNumberValidation} from './phone-number-validator'
+import { PhoneNumberValidation} from './phone-number-length-validator'
+import {  DigitCheckValidation} from './digit-check-validator'
 import { CustomerInfo, BasicInfo, PrimaryAddress, SecondaryAddress } from './customer-info-type';
 
 
@@ -11,19 +12,25 @@ import { CustomerInfo, BasicInfo, PrimaryAddress, SecondaryAddress } from './cus
   styleUrls: ['./reactive.component.css']
 })
 
-export class ReactiveFormComponent implements OnInit{
+export class ReactiveFormComponent implements OnInit, OnChanges{
 
   signupForm: FormGroup<CustomerInfo>;
   primaryAddressCheckBoxValue: boolean;
   secondaryAddressCheckBoxValue: boolean;
+  isDisable: boolean;
   
   constructor( ){
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("changes detects");
   }
 // ngOnInit: execute the code inside ngOnInit after class instantiated
   ngOnInit() {
     this.createCustomerForm();  
     this.primaryAddressCheckBoxValue = false;
     this.secondaryAddressCheckBoxValue = false;
+    this.isDisable=false
   }
 
   createCustomerForm() {
@@ -32,7 +39,7 @@ export class ReactiveFormComponent implements OnInit{
           firstName: new FormControl('',{validators: [Validators.required,Validators.minLength(4), Validators.maxLength(10), NameValidator()]}),
           lastName: new FormControl('',{validators: [Validators.required,Validators.minLength(4), Validators.maxLength(10), NameValidator()]}),
           email: new FormControl('',Validators.email),
-          phone: new FormControl(null, {validators: [Validators.required, PhoneNumberValidation()]} )
+          phone: new FormControl(null, {validators: [Validators.required, PhoneNumberValidation(),  DigitCheckValidation()]} )
      }),
         primaryAddress: new FormGroup<PrimaryAddress>({
           email: new FormControl('',Validators.email ),
@@ -53,18 +60,34 @@ export class ReactiveFormComponent implements OnInit{
         hobbies: new FormArray([])
     })
   }
-
-  copyBasicInfoIntoPrimaryAddress() {
+  updatePrimaryCheckBox(){
     this.primaryAddressCheckBoxValue=!this.primaryAddressCheckBoxValue;
-
-    if (this.primaryAddressCheckBoxValue) {
-        this.signupForm.controls.primaryAddress.controls.email.setValue(this.signupForm.controls.basicInfo.controls.email.value);
-        this.signupForm.controls.primaryAddress.controls.phone.setValue(this.signupForm.controls.basicInfo.controls.phone.value);
-    } else {
-        this.signupForm.controls.primaryAddress.controls.email.setValue("");
-        this.signupForm.controls.primaryAddress.controls.phone.setValue(null);
+    if(this.primaryAddressCheckBoxValue){
+      this.isDisable=!this.isDisable;
+      console.log("is disable: ", this.isDisable);
+    }else{
+      this.isDisable=!this.isDisable;
+      console.log("is disable: ", this.isDisable);
     }
+    this.copyBasicInfoIntoPrimaryAddress()
   }
+
+  copyBasicInfoIntoPrimaryAddress() {;
+      
+     if (this.signupForm.controls.basicInfo.controls.email.valid && this.signupForm.controls.basicInfo.controls.phone.valid && this.primaryAddressCheckBoxValue){
+      this.signupForm.controls.primaryAddress.controls.email.setValue(this.signupForm.controls.basicInfo.controls.email.value)
+      this.signupForm.controls.primaryAddress.controls.phone.setValue(this.signupForm.controls.basicInfo.controls.phone.value)
+    }else if(this.primaryAddressCheckBoxValue && this.signupForm.controls.basicInfo.controls.email.valid) {
+      this.signupForm.controls.primaryAddress.controls.email.setValue(this.signupForm.controls.basicInfo.controls.email.value)
+    }else if (this.primaryAddressCheckBoxValue && this.signupForm.controls.basicInfo.controls.phone.valid){
+      this.signupForm.controls.primaryAddress.controls.phone.setValue(this.signupForm.controls.basicInfo.controls.phone.value)
+    } else {
+         this.signupForm.controls.primaryAddress.controls.email.setValue("");
+         this.signupForm.controls.primaryAddress.controls.phone.setValue(null);
+    }
+    
+  }
+    
 
   copyPrimaryAddessIntoSecondaryAddress() {
     this.secondaryAddressCheckBoxValue=!this.secondaryAddressCheckBoxValue
