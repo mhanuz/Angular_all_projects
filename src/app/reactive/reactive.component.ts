@@ -31,7 +31,7 @@ export class ReactiveFormComponent implements OnInit, OnChanges{
     this.createCustomerForm();  
     this.primaryAddressCheckBoxValue = false;
     this.secondaryAddressCheckBoxValue = false;
-    this.isDisablePrimaryAddress=false;
+    this.isDisablePrimaryAddress=false; 
     this.isDisableSecondaryAddress=false;
   }
 
@@ -62,9 +62,10 @@ export class ReactiveFormComponent implements OnInit, OnChanges{
         hobbies: new FormArray([])
     })
   }
-  updatePrimaryCheckBox(){
+  updatePrimaryCheckBox(){ 
     this.primaryAddressCheckBoxValue=!this.primaryAddressCheckBoxValue;
     if(this.primaryAddressCheckBoxValue){
+      // make the email and phone input box read only when click primary address check box
       this.isDisablePrimaryAddress=!this.isDisablePrimaryAddress; 
     }else{
       this.isDisablePrimaryAddress=!this.isDisablePrimaryAddress;
@@ -91,6 +92,7 @@ export class ReactiveFormComponent implements OnInit, OnChanges{
   updateSecondaryCheckBox(){
     this.secondaryAddressCheckBoxValue=!this.secondaryAddressCheckBoxValue;
     if(this.secondaryAddressCheckBoxValue){
+      // make the all secondary input box read only when click secondary address check box
       this.isDisableSecondaryAddress=!this.isDisableSecondaryAddress
     }else{
       this.isDisableSecondaryAddress=!this.isDisableSecondaryAddress;
@@ -133,6 +135,8 @@ export class ReactiveFormComponent implements OnInit, OnChanges{
   onClear(){
     this.primaryAddressCheckBoxValue=false;
     this.secondaryAddressCheckBoxValue=false;
+    this.isDisablePrimaryAddress=false; 
+    this.isDisableSecondaryAddress=false;
     this.signupForm.controls.hobbies.clear(); // reset form array 
     this.signupForm.reset();
   }
