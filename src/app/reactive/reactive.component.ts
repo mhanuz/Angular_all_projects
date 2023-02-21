@@ -37,7 +37,7 @@ export class ReactiveFormComponent implements OnInit{
      }),
         primaryAddress: new FormGroup<PrimaryAddress>({
           email: new FormControl('', Validators.email),
-          phone: new FormControl(null, {nonNullable: true, validators: [Validators.required, PhoneNumberValidation(), DigitCheckValidation()]}),
+          phone: new FormControl(null, {validators: [Validators.required, PhoneNumberValidation(),  DigitCheckValidation()]} ),
           address: new FormControl('',Validators.required),
           city: new FormControl('',Validators.required),
           country: new FormControl('',Validators.required),
@@ -45,11 +45,11 @@ export class ReactiveFormComponent implements OnInit{
      }),
         secondaryAddress: new FormGroup<SecondaryAddress>({
           email: new FormControl('', Validators.email),
-          phone: new FormControl(null, {validators: [Validators.required, PhoneNumberValidation(), DigitCheckValidation()]}),
-          address: new FormControl('', Validators.required),
-          city: new FormControl('', Validators.required),
-          country: new FormControl('',Validators.required),
-          postCode: new FormControl(null,{validators: [Validators.required, Validators.maxLength(5)]})
+          phone: new FormControl(null, {validators: [PhoneNumberValidation(), DigitCheckValidation()]}),
+          address: new FormControl(''),
+          city: new FormControl(''),
+          country: new FormControl(''),
+          postCode: new FormControl(null, Validators.maxLength(5))
      }),
         hobbies: new FormArray([])
     })

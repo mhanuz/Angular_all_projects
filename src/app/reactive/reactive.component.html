@@ -67,7 +67,6 @@
                 <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.errors?.NotADigit">
                   Only digits are allowed
                 </span>
-                
             </span>
             
             
@@ -81,19 +80,6 @@
             <label class="form-check-label" for="flexCheckDefault" style="margin-left: 10px;">
                 If email and phone no are same.
             </label>
-            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.email.invalid  &&
-                    (signupForm.controls.basicInfo.touched || signupForm.controls.basicInfo.dirty) ">
-                  <span class="help-block" *ngIf="signupForm.controls.isSameAsBasicInfoAddress.value">
-                    Please enter a valid email address, otherwise your email will not set primary address form.
-                  </span>
-              </span>
-
-              <span class="help-block" *ngIf="(signupForm.controls.basicInfo.controls.phone.invalid) &&
-                    (signupForm.controls.basicInfo.touched || signupForm.controls.basicInfo.dirty) ">
-                  <span class="help-block" *ngIf="signupForm.controls.isSameAsBasicInfoAddress.value">
-                    Please enter a valid phone number, otherwise your phone number will not set primary address form.
-                  </span>
-              </span>
               
           </div>
           <ng-container formGroupName="primaryAddress">
@@ -117,13 +103,14 @@
             >
             <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.phone.invalid && (signupForm.controls. primaryAddress.controls.phone.dirty || signupForm.controls.primaryAddress.controls.phone.touched)">
               <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.phone.errors?.required">Phone no is required.</span>
-              </span>
-              <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.phone.errors?.NotElevenDigit">
+              <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.phone.errors?.NotElevenDigit
+              && !signupForm.controls.primaryAddress.controls.phone.errors?.NotADigit">
                 Phone number should be 11 digit.
               </span>
               <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.phone.errors?.NotADigit">
-                  Only digits are allowed
+                Only digits are allowed
               </span>
+          </span>
           </div>
           <div class="form-group">
             <label for="address">Address</label>
@@ -170,7 +157,7 @@
           </div>
           <div class="form-group">
             <label for="postCode">Post Code</label>
-            <input type="number"
+            <input type="text"
             id="postCode"
             class="form-control"
             formControlName="postCode"
@@ -179,6 +166,9 @@
             (signupForm.controls.primaryAddress.controls.postCode.dirty || signupForm.controls.primaryAddress.controls.postCode.touched)">
                 <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.postCode.errors?.required">
                   Post code is a required field
+                </span>
+                <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.postCode.errors?.maxlength">
+                  Not more than 5 Character
                 </span>
             </span>
           </div>
@@ -210,15 +200,18 @@
           </div>
           <div class="form-group">
             <label for="phone">Phone No</label>
-            <input type="number"
+            <input type="text"
               id="phone"
               class="form-control"
               formControlName="phone"
               >
             <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.phone.invalid &&  (signupForm.controls.secondaryAddress.controls.phone.dirty || signupForm.controls.secondaryAddress.   controls.phone.touched)">
-              <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.phone.errors?.    required">Phone no is a required field.</span>
-              <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.phone.errors?.NotElevenDigit">
+              <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.phone.errors?.NotElevenDigit
+              && !signupForm.controls.secondaryAddress.controls.phone.errors?.NotADigit">
                 Should be 11 digits.
+              </span>
+              <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.phone.errors?.NotADigit">
+                Only digits are allowed
               </span>
             </span>
           </div>
@@ -229,9 +222,6 @@
               class="form-control"
               formControlName="address"
             >
-            <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.address.invalid &&
-            (signupForm.controls.secondaryAddress.controls.address.dirty || signupForm.controls.secondaryAddress.controls.address.touched)">Address is a required field.
-            </span>
           </div>
           <div class="form-group">
             <label for="city">City</label>
@@ -240,9 +230,6 @@
                 class="form-control"
                 formControlName="city"
                 >
-            <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.city.invalid &&
-              (signupForm.controls.secondaryAddress.controls.city.dirty || signupForm.controls.secondaryAddress.controls.city.touched)">City is a required field.
-            </span>
           </div>
           <div class="form-group">
             <label for="country">Country</label>
@@ -251,20 +238,23 @@
               class="form-control"
               formControlName="country"
             >
-            <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.country.invalid &&
-            (signupForm.controls.secondaryAddress.controls.country.dirty || signupForm.controls.secondaryAddress.controls.country.touched)">Country is a required field.
-            </span>
           </div>
           <div class="form-group">
             <label for="postCode">Post Code</label>
-            <input type="number"
+            <input type="text"
               id="postCode"
               class="form-control"
               formControlName="postCode"
               >
-            <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.postCode.invalid &&
-                (signupForm.controls.secondaryAddress.controls.postCode.dirty || signupForm.controls.secondaryAddress.controls.postCode.touched)">Post code is a required field.
-            </span>
+              <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.postCode.invalid &&
+              (signupForm.controls.secondaryAddress.controls.postCode.dirty || signupForm.controls.secondaryAddress.controls.postCode.touched)">
+                  <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.postCode.errors?.required">
+                    Post code is a required field
+                  </span>
+                  <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.postCode.errors?.maxlength">
+                    Not more than 5 Character
+                  </span>
+              </span>
                 
           </div>
           </ng-container>
