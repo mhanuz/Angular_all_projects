@@ -4,8 +4,9 @@ import { AbstractControl, ValidatorFn } from "@angular/forms";
 export function DigitCheckValidation(): ValidatorFn {
     return(control: AbstractControl): {[key: string]: boolean}| null => {
         if(control.value !== null) {
-            
-            if(!Number(control.value)){
+            if(control.value == 0){
+                return null
+            }else if(!Number(control.value)){
                 return {"NotADigit": true}
             }else{
                return null

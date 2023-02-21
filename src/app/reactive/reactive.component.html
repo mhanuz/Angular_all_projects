@@ -15,13 +15,13 @@
             <!-- ? is used to check is the value null -->
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.firstName.invalid && (signupForm.controls.basicInfo.controls.firstName.dirty || signupForm.controls.basicInfo.controls.firstName.touched)">
             <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.required">Name is required</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.minlength"> At least 4 character</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.maxlength"> At most 10 character</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.minlength"> At least 4 character</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.maxlength"> At most 10 character</span>
+            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.DotNotation">Don't add title in the name</span>
+            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.minlength
+            && !signupForm.controls.basicInfo.controls.firstName.errors?.DotNotation"> At least 4 character</span>
+            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.maxlength
+            && !signupForm.controls.basicInfo.controls.firstName.errors?.DotNotation"> At most 10 character</span>
             </span>
-            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.DotNotation">Don't add title in the name</span>
-            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.DotNotation">Don't add title in the name</span>
+            
           </div>
           <div class="form-group">
             <label for="lastName">Last Name</label>
@@ -30,18 +30,15 @@
             id="lastName"
             formControlName="lastName"
             >
-            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.invalid && (signupForm.   controls.basicInfo.controls.lastName.dirty || signupForm.controls.basicInfo.controls.lastName.touched)">
-            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.required">Name is required.</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.minlength"> At least 4 character</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.maxlength"> At most 10 character</span>
-            </span>
-            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.DotNotation">Don't add title in the  name</span>
-            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.invalid && (signupForm.   controls.basicInfo.controls.lastName.dirty || signupForm.controls.basicInfo.controls.lastName.touched)">
-            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.required">Name is required.</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.minlength"> At least 4 character</span>
-            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.maxlength"> At most 10 character</span>
-            </span>
-            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.DotNotation">Don't add title in the  name</span>
+            <!-- validator sequence should be same as component class -->
+            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.invalid && (signupForm.controls.basicInfo.controls.lastName.dirty || signupForm.controls.basicInfo.controls.lastName.touched)">
+              <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.required">Name is required</span>
+              <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.DotNotation">Don't add title in the name</span>
+              <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.minlength
+              && !signupForm.controls.basicInfo.controls.lastName.errors?.DotNotation"> At least 4 character</span>
+              <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.maxlength
+              && !signupForm.controls.basicInfo.controls.lastName.errors?.DotNotation"> At most 10 character</span>
+              </span>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
@@ -59,17 +56,21 @@
             <input type="text"
             id="phone"
             class="form-control"
-            formControlName="phone"
-              >
+            formControlName="phone">
+
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.invalid && (signupForm.controls. basicInfo.controls.phone.dirty || signupForm.controls.basicInfo.controls.phone.touched)">
-            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.errors?.required">Phone no is required.</span>
+                <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.errors?.required">Phone no is required.</span>
+                <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.errors?.NotElevenDigit
+                && !signupForm.controls.basicInfo.controls.phone.errors?.NotADigit">
+                  Phone number should be 11 digit.
+                </span>
+                <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.errors?.NotADigit">
+                  Only digits are allowed
+                </span>
+                
             </span>
-            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.errors?.NotElevenDigit">
-              Phone number should be 11 digit.
-            </span>
-            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.errors?.NotADigit">
-                Only digits are allowed
-            </span>
+            
+            
           </div>
         </div>
         <p style="color: brown;">Primary Address</p>

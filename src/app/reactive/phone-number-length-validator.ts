@@ -4,7 +4,9 @@ import { AbstractControl, ValidatorFn } from "@angular/forms";
 export function PhoneNumberValidation(): ValidatorFn {
     return(control: AbstractControl): {[key: string]: boolean}| null => {
         if(control.value !== null) {
-            if(control.value.toString().length != 11){
+            if(control.value === ''){
+                return null
+            }else if(control.value.toString().length != 11){
                 return {"NotElevenDigit": true}
             }else{
                return null
