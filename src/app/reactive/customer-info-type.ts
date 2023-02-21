@@ -1,10 +1,11 @@
 import { FormGroup, FormControl, FormArray } from "@angular/forms"
-
 export interface CustomerInfo {
-    basicInfo: FormGroup<BasicInfo>, 
-    primaryAddress: FormGroup<PrimaryAddress>, 
-    secondaryAddress: FormGroup<SecondaryAddress>,
-    hobbies:FormArray;
+  isSameAsBasicInfoAddress:FormControl<boolean>,
+  isSameAsPrimaryAddress: FormControl<boolean>,
+  basicInfo: FormGroup<BasicInfo>, 
+  primaryAddress: FormGroup<PrimaryAddress>, 
+  secondaryAddress: FormGroup<SecondaryAddress>,
+  hobbies:FormArray;
 }
 //formgroup: combines formcontrols into an object,formcontrol name is the key of object 
 //formcontrol: contain data, value and validation information
@@ -12,11 +13,11 @@ export interface CustomerInfo {
 export interface BasicInfo{
   firstName: FormControl<string>,
   lastName: FormControl<string>,
-  email?: FormControl<string>,
+  email: FormControl<string>,
   phone: FormControl<number>
 }
 export interface PrimaryAddress{
-  email?: FormControl<string>,
+  email: FormControl<string>,
   phone: FormControl<number>,
   address: FormControl<string>,
   city: FormControl<string>,
@@ -25,9 +26,9 @@ export interface PrimaryAddress{
 }
 export interface SecondaryAddress{
   email?: FormControl<string>,
-  phone: FormControl<number>,
-  address: FormControl<string>,
-  city: FormControl<string>,
-  country: FormControl<string>,
-  postCode: FormControl<string | number>
+  phone?: FormControl<number>,
+  address?: FormControl<string>,
+  city?: FormControl<string>,
+  country?: FormControl<string>,
+  postCode?: FormControl<string | number>
 }
