@@ -17,7 +17,10 @@
             <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.required">Name is required</span>
             <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.minlength"> At least 4 character</span>
             <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.maxlength"> At most 10 character</span>
+            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.minlength"> At least 4 character</span>
+            <span *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.maxlength"> At most 10 character</span>
             </span>
+            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.DotNotation">Don't add title in the name</span>
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.firstName.errors?.DotNotation">Don't add title in the name</span>
           </div>
           <div class="form-group">
@@ -27,6 +30,12 @@
             id="lastName"
             formControlName="lastName"
             >
+            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.invalid && (signupForm.   controls.basicInfo.controls.lastName.dirty || signupForm.controls.basicInfo.controls.lastName.touched)">
+            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.required">Name is required.</span>
+            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.minlength"> At least 4 character</span>
+            <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.maxlength"> At most 10 character</span>
+            </span>
+            <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.DotNotation">Don't add title in the  name</span>
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.lastName.invalid && (signupForm.   controls.basicInfo.controls.lastName.dirty || signupForm.controls.basicInfo.controls.lastName.touched)">
             <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.required">Name is required.</span>
             <span *ngIf="signupForm.controls.basicInfo.controls.lastName.errors?.minlength"> At least 4 character</span>
@@ -175,6 +184,7 @@
         </ng-container>
         </div>
 
+
         <p style="color: brown;">Secondary Address</p>
         <div>
           <div class="form-check">
@@ -204,12 +214,12 @@
               class="form-control"
               formControlName="phone"
               >
-            <!-- <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.phone.invalid &&  (signupForm.controls.secondaryAddress.controls.phone.dirty || signupForm.controls.secondaryAddress.   controls.phone.touched)">
+            <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.phone.invalid &&  (signupForm.controls.secondaryAddress.controls.phone.dirty || signupForm.controls.secondaryAddress.   controls.phone.touched)">
               <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.phone.errors?.    required">Phone no is a required field.</span>
               <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.phone.errors?.NotElevenDigit">
                 Should be 11 digits.
               </span>
-            </span> -->
+            </span>
           </div>
           <div class="form-group">
             <label for="address">Address</label>
@@ -254,6 +264,7 @@
             <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.postCode.invalid &&
                 (signupForm.controls.secondaryAddress.controls.postCode.dirty || signupForm.controls.secondaryAddress.controls.postCode.touched)">Post code is a required field.
             </span>
+                
           </div>
           </ng-container>
         </div>
@@ -268,12 +279,16 @@
             *ngFor = "let hobby of signupForm.get('hobbies')?.controls; let i =index"
             >
               <input type="text" class="form-control" [formControlName]="i">   
+              <input type="text" class="form-control" [formControlName]="i">   
             </div>
         </div> -->
         <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Submit</button>
         <button type="button" class="btn btn-danger" style="margin-left: 10px;"
           (click)="onClear()">Cancel</button>
       </form>
+    </div>
+  </div>
+<div>
     </div>
   </div>
 <div>

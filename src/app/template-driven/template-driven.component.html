@@ -19,6 +19,9 @@
               <span class="help-block" *ngIf="firstname.errors?.['required']">Name is required.</span>
               <span class="help-block" *ngIf="firstname.errors?.['minlength']">Atleast 4 Character.</span>
               <span class="help-block" *ngIf="firstname.errors?.['maxlength']">Atmost 15 Character.</span>
+              <span class="help-block" *ngIf="firstname.errors?.['required']">Name is required.</span>
+              <span class="help-block" *ngIf="firstname.errors?.['minlength']">Atleast 4 Character.</span>
+              <span class="help-block" *ngIf="firstname.errors?.['maxlength']">Atmost 15 Character.</span>
             </div>
           </div>
         <div class="form-group">
@@ -36,8 +39,12 @@
               <span class="help-block" *ngIf="lastname.errors?.['required']">Name is required.</span>
               <span class="help-block" *ngIf="lastname.errors?.['minlength']">Atleast 4 Character.</span>
               <span class="help-block" *ngIf="lastname.errors?.['maxlength']">Atmost 15 Character.</span>
+              <span class="help-block" *ngIf="lastname.errors?.['required']">Name is required.</span>
+              <span class="help-block" *ngIf="lastname.errors?.['minlength']">Atleast 4 Character.</span>
+              <span class="help-block" *ngIf="lastname.errors?.['maxlength']">Atmost 15 Character.</span>
             </div>
         </div>
+
         <div class="form-group">
           <label for="email">Email address</label>
           <input type="email" class="form-control" id="email"
@@ -50,6 +57,7 @@
           >
             <span class="help-block" *ngIf="emailAddress.errors?.email">Email is not valid</span>
         </div>
+
         <div class="form-group">
           <label for="phone">Phone Number</label>
           <input type="number" class="form-control" id="phone" 
@@ -93,6 +101,12 @@
         <div class="form-group">
           <label for="pphone">Phone Number</label>
           <input type="number" class="form-control" id="pphone" 
+          >
+          <span class="help-block" *ngIf="pemailAddress.errors?.email">Email is not valid.</span>
+        </div>
+        <div class="form-group">
+          <label for="pphone">Phone Number</label>
+          <input type="number" class="form-control" id="pphone" 
             placeholder="Primary Phone"
             ngModel
             name="pphone"
@@ -122,6 +136,14 @@
         <div class="form-group">
           <label for="pcity">City</label>
           <input type="text" class="form-control" id="pcity"
+          >
+          <span class="help-block" *ngIf="!paddress.valid && (paddress.touched || paddress.dirty)">
+            <span class="help-block" *ngIf="paddress.errors?.['required']"> Required field.</span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="pcity">City</label>
+          <input type="text" class="form-control" id="pcity"
             ngModel
             name="pcity"
             placeholder="City"
@@ -135,11 +157,27 @@
         <div class="form-group">
           <label for="country">Country</label>
           <input type="text" class="form-control" id="country"
+          >
+          <span class="help-block" *ngIf="!pcity.valid && (pcity.touched || pcity.dirty)">
+            <span class="help-block" *ngIf="pcity.errors?.['required']"> Required field.</span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input type="text" class="form-control" id="country"
             ngModel
             name="pcountry"
             placeholder="country"
             required
             #pcountry="ngModel"
+          >
+          <span class="help-block" *ngIf="!pcountry.valid && (pcountry.touched || pcountry.dirty)">
+            <span class="help-block" *ngIf="pcountry.errors?.['required']"> Required field.</span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="post code">Post Code</label>
+          <input type="text" class="form-control" id="ppostcode"
           >
           <span class="help-block" *ngIf="!pcountry.valid && (pcountry.touched || pcountry.dirty)">
             <span class="help-block" *ngIf="pcountry.errors?.['required']"> Required field.</span>
@@ -166,7 +204,38 @@
           <div class="form-check">
             <input class="form-check-input" type="checkbox"
               [checked]="secondaryAddressCheckBoxValue"
+          >
+          <span class="help-block" *ngIf="postCode.invalid && (postCode.touched || postCode.dirty)" >
+            <span class="help-block" *ngIf="postCode.errors?.['required']"> Required field.</span>
+            <span class="help-block" *ngIf="postCode.errors?.['minlength']">Exact 5 digits.</span>
+          </span>
+        </div>
+        <p>Secondary Address</p> 
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox"
+              [checked]="secondaryAddressCheckBoxValue"
               (click)="copyPrimaryAddressIntoSecondaryAddress()"
+              id="gridCheck"
+            >
+            <label class="form-check-label" for="gridCheck">
+              Check (if primary and seconday is same)
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="semail">Email address</label>
+          <input type="text" class="form-control" id="semail"
+          ngModel
+          name="semail"
+          placeholder="Email address"
+          #secondaryEmail
+          >
+          <span class="help-block" *ngIf="secondaryEmail.errors?.email">Email is not valid.</span>
+        </div>
+        <div class="form-group">
+          <label for="sphone">Phone Number</label>
+          <input type="number" class="form-control" id="sphone"
               id="gridCheck"
             >
             <label class="form-check-label" for="gridCheck">
@@ -202,10 +271,20 @@
         <div class="form-group">
           <label for="saddress">Address</label>
           <input type="text" class="form-control" id="saddress"
+          >
+          <span class="help-block" *ngIf="!sphone.valid && (sphone.touched || sphone.dirty)">
+            <span class="help-block" *ngIf="sphone.errors?.['required']"> Required field</span>
+            <span class="help-block" *ngIf="sphone.errors?.['pattern']">Phone number should cointain 13 digit with 88.</span>
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="saddress">Address</label>
+          <input type="text" class="form-control" id="saddress"
             ngModel
             name="saddress"
             placeholder="Address">
         </div>
+
         <div class="form-group">
           <label for="scity">City</label>
           <input type="text" class="form-control" id="scity"
@@ -217,8 +296,20 @@
         <div class="form-group">
           <label for="scountry">Country</label>
           <input type="text" class="form-control" id="scountry"
+            placeholder="City"
+          >
+        </div>
+        <div class="form-group">
+          <label for="scountry">Country</label>
+          <input type="text" class="form-control" id="scountry"
             ngModel
             name="scountry"
+            placeholder="Country"
+          >
+        </div>
+        <div class="form-group">
+          <label for="spostcode">Post Code</label>
+          <input type="text" class="form-control" id="spostcode"
             placeholder="Country"
           >
         </div>
@@ -237,4 +328,5 @@
     </div>
   </div>
 </div>
+   
   

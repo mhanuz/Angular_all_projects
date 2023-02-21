@@ -97,7 +97,7 @@ export class TemplateDrivenFormComponent implements OnInit {
       this.customer.secondaryAddress.country = this.signupForm?.value.scountry;
       this.customer.secondaryAddress.postCode = this.signupForm?.value.spostcode;
     }
-   }
+   } 
 
    updatePrimaryCheckBox(){ 
     this.primaryAddressCheckBoxValue=!this.primaryAddressCheckBoxValue;
@@ -115,7 +115,6 @@ export class TemplateDrivenFormComponent implements OnInit {
     if(this.primaryAddressCheckBoxValue) { 
       this.signupForm.controls.pemail.patchValue(this.signupForm.controls.email.value)
       this.signupForm.controls.pphone.patchValue(this.signupForm.controls.phone.value)
-
     }else{
       this.signupForm.controls.pemail.patchValue('')
       this.signupForm.controls.pphone.patchValue(null)
@@ -131,12 +130,10 @@ export class TemplateDrivenFormComponent implements OnInit {
       this.isDisableSecondaryAddress=!this.isDisableSecondaryAddress;
     }
     this.copyPrimaryAddressIntoSecondaryAddress()
-
   }
 
   copyPrimaryAddressIntoSecondaryAddress() {
-    // this.secondaryAddressCheckBoxValue = !this.secondaryAddressCheckBoxValue
-    
+
     if(this.secondaryAddressCheckBoxValue){
       this.signupForm.controls.semail.patchValue(this.signupForm.controls.pemail.value)
       this.signupForm.controls.sphone.patchValue(this.signupForm.controls.pphone.value)
