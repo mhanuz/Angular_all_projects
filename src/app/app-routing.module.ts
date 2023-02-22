@@ -7,6 +7,7 @@ import { ReactiveFormComponent } from './reactive/reactive.component';
 import { TemplateDrivenFormComponent } from './template-driven/template-driven.component';
 import { ViewEncapsulationV1Component } from './encap-v1/encap-v1.component';
 import { ViewEncapsulationV2Component } from './encap-v2/encap-v2.component';
+import { CommonAddressComponent } from './reactive/common-address/common-address.component';
 const routes: Routes = [
   {path: 'pipe', component:AngularPipeComponent},
   {path: 'io-decorator', component:IODecoratorComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'reactive-form', component:ReactiveFormComponent},
   {path: 'td-form', component:TemplateDrivenFormComponent},
   {path: 'encap-v1', component:ViewEncapsulationV1Component},
-  {path: 'encap-v2', component:ViewEncapsulationV2Component}
+  {path: 'encap-v2', component:ViewEncapsulationV2Component},
+  {path: 'common-address', component: CommonAddressComponent}
 ];
 
 @NgModule({

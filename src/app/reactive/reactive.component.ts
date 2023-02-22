@@ -4,6 +4,7 @@ import { NameValidator } from './name-validator';
 import { PhoneNumberValidation} from './phone-number-length-validator'
 import { DigitCheckValidation} from './digit-check-validator'
 import { CustomerInfo, BasicInfo, PrimaryAddress, SecondaryAddress } from './customer-info-type';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
   isCollapse: boolean;
   valueChangesStatus;
   
-  constructor( ){
+  constructor( private router: Router, private activatedRoute: ActivatedRoute){
   }
 
 // ngOnInit: execute the code inside ngOnInit after class instantiated
@@ -27,6 +28,9 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
     this.listenIsSameAsBasicInfoAddress();
     this.listenIsSameAsPrimaryAddress();
     this.isCollapse = false;
+    if(this.activatedRoute.snapshot.queryParamMap.get('isCollapse')){
+      this.isCollapse=true;
+    }
   }
 
   createCustomerForm() {
@@ -111,6 +115,11 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
       console.log(this.signupForm.getRawValue());
       this.onClear();
     }
+  }
+
+  toggleSecodaryAddres(){
+    this.isCollapse = !this.isCollapse
+    this.router.navigate(['reactive-form'], {queryParams:{isCollapse:this.isCollapse}})
   }
 
   addHobby(){
