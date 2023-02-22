@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Validators, FormArray,FormGroup, FormControl} from '@angular/forms';
 import { NameValidator } from './name-validator';
 import { PhoneNumberValidation} from './phone-number-length-validator'
@@ -12,9 +12,10 @@ import { CustomerInfo, BasicInfo, PrimaryAddress, SecondaryAddress } from './cus
   styleUrls: ['./reactive.component.css']
 })
 
-export class ReactiveFormComponent implements OnInit{
+export class ReactiveFormComponent implements OnInit, OnDestroy{
 
   signupForm: FormGroup<CustomerInfo>;
+  valueChangesStatus;
   constructor( ){
   }
 
@@ -50,8 +51,8 @@ export class ReactiveFormComponent implements OnInit{
           city: new FormControl(''),
           country: new FormControl(''),
           postCode: new FormControl(null, Validators.maxLength(5))
-     }),
-        hobbies: new FormArray([])
+     })
+        // hobbies: new FormArray([])
     })
   }
 
@@ -59,7 +60,7 @@ export class ReactiveFormComponent implements OnInit{
    * @description copy mail and phone from basicInfoAddress into primaryAddress  
    */
   listenIsSameAsBasicInfoAddress() {
-     this.signupForm.controls.isSameAsBasicInfoAddress.valueChanges.subscribe((isSameAsBasicInfoAddress)=>{
+     this.valueChangesStatus = this.signupForm.controls.isSameAsBasicInfoAddress.valueChanges.subscribe((isSameAsBasicInfoAddress)=>{
       ['email','phone'].forEach((field)=>{
           if(isSameAsBasicInfoAddress){
             this.signupForm.controls.primaryAddress.controls[field].patchValue(this.signupForm.controls.basicInfo.controls[field].value);
@@ -115,8 +116,12 @@ export class ReactiveFormComponent implements OnInit{
   // }
 
   onClear(){
-    this.signupForm.controls.hobbies.clear(); // reset form array 
+   // this.signupForm.controls.hobbies.clear(); // reset form array 
     this.signupForm.reset();
+  }
+
+  ngOnDestroy(): void {
+    this.valueChangesStatus.unsubscribe();
   }
 
 }

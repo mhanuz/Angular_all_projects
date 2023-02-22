@@ -4,3 +4,6 @@ input.ng-invalid.ng-touched{
 .help-block{
     color: red;
 }
+.requiered-mark{
+    color: red;
+}
