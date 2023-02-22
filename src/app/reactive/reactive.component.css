@@ -7,3 +7,16 @@ input.ng-invalid.ng-touched{
 .requiered-mark{
     color: red;
 }
+.sec-add-collapse-button{
+    margin-right: 5px ;
+    margin-bottom: 10px;
+    color: brown;
+    font-size: large;
+}
+
+.sec-add-collapse-button:hover{
+    margin-right: 5px ;
+    margin-bottom: 10px;
+    color: green;
+    cursor: pointer;
+}

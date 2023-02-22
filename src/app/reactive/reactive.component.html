@@ -72,6 +72,9 @@
             </span>
           </div>
         </div>
+        
+        <!-- primary address section start from here -->
+
         <p style="color: brown;">Primary Address</p>
         <div>
           <div class="form-check">
@@ -85,12 +88,12 @@
           <app-common-address [group]="signupForm.controls.primaryAddress" [addressType]="'Primary'"></app-common-address>
         </div>
 
-
-
-
         <!-- Secondary Address start form here  -->
-
-        <div>
+        <a 
+          (click)="isCollapse = !isCollapse"
+          class="sec-add-collapse-button"
+        >Secondary Address</a>
+        <div *ngIf="isCollapse">
           <div class="form-check">
             <input class="form-check-input" type="checkbox" formControlName="isSameAsPrimaryAddress"
             value="" id="flexCheckDefault">
@@ -103,7 +106,9 @@
           <app-common-address [group]="signupForm.controls.secondaryAddress" [addressType]="'Secondary'"></app-common-address>
 
         </div>
-        <!-- <div formArrayName="hobbies">
+
+        <!-- add hobbies : array form -->
+        <div formArrayName="hobbies">
             <h3>hobbies List </h3>
             <button type="button"
             class="btn btn-success"
@@ -116,9 +121,9 @@
               <input type="text" class="form-control" [formControlName]="i">   
               <input type="text" class="form-control" [formControlName]="i">   
             </div>
-        </div> -->
-        <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Submit</button>
-        <button type="button" class="btn btn-danger" style="margin-left: 10px;"
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid" style="margin-bottom: 10px;">Submit</button>
+        <button type="button" class="btn btn-danger" style="margin-left: 10px; margin-bottom: 10px;"
           (click)="onClear()">Cancel</button>
       </form>
     </div>

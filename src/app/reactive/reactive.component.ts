@@ -15,7 +15,9 @@ import { CustomerInfo, BasicInfo, PrimaryAddress, SecondaryAddress } from './cus
 export class ReactiveFormComponent implements OnInit, OnDestroy{
 
   signupForm: FormGroup<CustomerInfo>;
+  isCollapse: boolean;
   valueChangesStatus;
+  
   constructor( ){
   }
 
@@ -24,6 +26,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
     this.createCustomerForm();  
     this.listenIsSameAsBasicInfoAddress();
     this.listenIsSameAsPrimaryAddress();
+    this.isCollapse = false;
   }
 
   createCustomerForm() {
@@ -51,8 +54,8 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
           city: new FormControl(''),
           country: new FormControl(''),
           postCode: new FormControl(null, Validators.maxLength(5))
-     })
-        // hobbies: new FormArray([])
+     }),
+        hobbies: new FormArray([])
     })
   }
 
@@ -110,13 +113,13 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
     }
   }
 
-  // addHobby(){
-  //   const control = new FormControl(null, Validators.required);
-  //   (<FormArray>this.signupForm.get('hobbies')).push(control);
-  // }
+  addHobby(){
+    const control = new FormControl(null, Validators.required);
+    (<FormArray>this.signupForm.get('hobbies')).push(control);
+  }
 
   onClear(){
-   // this.signupForm.controls.hobbies.clear(); // reset form array 
+    this.signupForm.controls.hobbies.clear(); // reset form array 
     this.signupForm.reset();
   }
 
