@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Validators, FormArray,FormGroup, FormControl} from '@angular/forms';
 import { NameValidator } from './name-validator';
 import { PhoneNumberValidation} from './phone-number-length-validator'
@@ -13,21 +13,22 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./reactive.component.css']
 })
 
-export class ReactiveFormComponent implements OnInit, OnDestroy{
+export class ReactiveFormComponent implements OnInit{
 
   signupForm: FormGroup<CustomerInfo>;
   isCollapse: boolean;
-  valueChangesStatus;
+  editFormArrayValue: boolean;
+  formArrayIndexnumber: number;
   
   constructor( private router: Router, private activatedRoute: ActivatedRoute){
   }
 
-// ngOnInit: execute the code inside ngOnInit after class instantiated
   ngOnInit() {
     this.createCustomerForm();  
     this.listenIsSameAsBasicInfoAddress();
     this.listenIsSameAsPrimaryAddress();
     this.isCollapse = false;
+    this.editFormArrayValue = false;
     if(this.activatedRoute.snapshot.queryParamMap.get('isCollapse')){
       this.isCollapse=true;
     }
@@ -59,7 +60,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
           country: new FormControl(''),
           postCode: new FormControl(null, Validators.maxLength(5))
      }),
-        hobbies: new FormArray([])
+        hobbies: new FormArray([ new FormControl('')])
     })
   }
 
@@ -67,7 +68,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
    * @description copy mail and phone from basicInfoAddress into primaryAddress  
    */
   listenIsSameAsBasicInfoAddress() {
-     this.valueChangesStatus = this.signupForm.controls.isSameAsBasicInfoAddress.valueChanges.subscribe((isSameAsBasicInfoAddress)=>{
+      this.signupForm.controls.isSameAsBasicInfoAddress.valueChanges.subscribe((isSameAsBasicInfoAddress)=>{
       ['email','phone'].forEach((field)=>{
           if(isSameAsBasicInfoAddress){
             this.signupForm.controls.primaryAddress.controls[field].patchValue(this.signupForm.controls.basicInfo.controls[field].value);
@@ -77,9 +78,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
             this.signupForm.controls.primaryAddress.controls[field].enable();
           } 
           this.signupForm.controls.basicInfo.controls[field].valueChanges.subscribe((basicInfo)=>{
-            if(basicInfo !== null){
               this.signupForm.controls.primaryAddress.controls[field].setValue(basicInfo)
-          }
         })
       })
     })
@@ -101,9 +100,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
           }
           
           this.signupForm.controls.primaryAddress.controls[field].valueChanges.subscribe((primaryAddress) => {
-              if(primaryAddress !== null){
                 this.signupForm.controls.secondaryAddress.controls[field].patchValue(primaryAddress)
-              }
             })
       })
     })
@@ -114,6 +111,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
       // getraw value will show disable value also
       console.log(this.signupForm.getRawValue());
       this.onClear();
+    
     }
   }
 
@@ -125,15 +123,18 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
   addHobby(){
     const control = new FormControl(null, Validators.required);
     (<FormArray>this.signupForm.get('hobbies')).push(control);
+    console.log(this.signupForm.get('hobbies').value.length);
+  }
+
+  arrayFormEdit(i: number){
+    this.editFormArrayValue = true;
+    this.formArrayIndexnumber = i
   }
 
   onClear(){
-    this.signupForm.controls.hobbies.clear(); // reset form array 
+   // this.signupForm.controls.hobbies.clear();
     this.signupForm.reset();
   }
 
-  ngOnDestroy(): void {
-    this.valueChangesStatus.unsubscribe();
-  }
 
 }
