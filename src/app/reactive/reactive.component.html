@@ -1,5 +1,8 @@
 <div class="container">
   <div class="row">
+    <!-- <pre>
+      {{signupForm.value | json}}
+    </pre> -->
     <div class="col-md-6">
       <h1>Customer Information </h1>
       <p style="color: brown;">Basic Information</p>
@@ -57,7 +60,6 @@
             id="phone"
             class="form-control"
             formControlName="phone">
-
             <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.invalid && (signupForm.controls. basicInfo.controls.phone.dirty || signupForm.controls.basicInfo.controls.phone.touched)">
                 <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.errors?.required">Phone no is required.</span>
                 <span class="help-block" *ngIf="signupForm.controls.basicInfo.controls.phone.errors?.NotElevenDigit
@@ -68,8 +70,6 @@
                   Only digits are allowed
                 </span>
             </span>
-            
-            
           </div>
         </div>
         <p style="color: brown;">Primary Address</p>
@@ -80,103 +80,16 @@
             <label class="form-check-label" for="flexCheckDefault" style="margin-left: 10px;">
                 If email and phone no are same.
             </label>
-              
           </div>
-          <ng-container formGroupName="primaryAddress">
-          <div class="form-group">
-            <label for="email">Email <span class="requiered-mark">*</span></label>
-            <input type="text"
-            id="email"
-            class="form-control"
-            formControlName="email"
-            >
-            <span 
-            *ngIf="signupForm.controls.primaryAddress.controls.email.errors"
-            class="help-block2" style="color: red;">Please enter a valid email. </span>
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone No <span class="requiered-mark">*</span></label>
-            <input type="text"
-            id="phone"
-            class="form-control"
-            formControlName="phone"
-            >
-            <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.phone.invalid && (signupForm.controls. primaryAddress.controls.phone.dirty || signupForm.controls.primaryAddress.controls.phone.touched)">
-              <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.phone.errors?.required">Phone no is required.</span>
-              <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.phone.errors?.NotElevenDigit
-              && !signupForm.controls.primaryAddress.controls.phone.errors?.NotADigit">
-                Phone number should be 11 digit.
-              </span>
-              <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.phone.errors?.NotADigit">
-                Only digits are allowed
-              </span>
-          </span>
-          </div>
-          <div class="form-group">
-            <label for="address">Address <span class="requiered-mark">*</span></label>
-            <input type="text"
-            id="address"
-            class="form-control"
-            formControlName="address"
-            >
-            <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.address.invalid &&
-            (signupForm.controls.primaryAddress.controls.address.dirty || signupForm.controls.primaryAddress.controls.address.touched)">
-            <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.address.errors?.required"> 
-              Address is a required field.
-            </span>
-            </span>
-          </div>
-          <div class="form-group">
-            <label for="city">City <span class="requiered-mark">*</span></label>
-            <input type="text"
-            id="city"
-            class="form-control"
-            formControlName="city"
-            
-            >
-            <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.city.invalid &&
-            (signupForm.controls.primaryAddress.controls.city.dirty || signupForm.controls.primaryAddress.controls.city.touched)">
-            <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.city.errors?.required"> 
-              City is a required field.
-            </span>
-            </span>
-          </div>
-          <div class="form-group">
-            <label for="country">Country <span class="requiered-mark">*</span></label>
-            <input type="text"
-            id="country"
-            class="form-control"
-            formControlName="country"
-            >
-            <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.country.invalid &&
-            (signupForm.controls.primaryAddress.controls.country.dirty || signupForm.controls.primaryAddress.controls.country.touched)">
-            <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.country.errors?.required"> 
-              Country is a required field.
-            </span>
-            </span>
-          </div>
-          <div class="form-group">
-            <label for="postCode">Post Code <span class="requiered-mark">*</span></label>
-            <input type="text"
-            id="postCode"
-            class="form-control"
-            formControlName="postCode"
-            >
-            <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.postCode.invalid &&
-            (signupForm.controls.primaryAddress.controls.postCode.dirty || signupForm.controls.primaryAddress.controls.postCode.touched)">
-                <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.postCode.errors?.required">
-                  Post code is a required field
-                </span>
-                <span class="help-block" *ngIf="signupForm.controls.primaryAddress.controls.postCode.errors?.maxlength">
-                  Not more than 5 Character
-                </span>
-            </span>
-          </div>
-        </ng-container>
+          <!-- primary address form -->
+          <app-common-address [group]="signupForm.controls.primaryAddress" [addressType]="'Primary'"></app-common-address>
         </div>
 
 
-        <p style="color: brown;">Secondary Address</p>
+
+
+        <!-- Secondary Address start form here  -->
+
         <div>
           <div class="form-check">
             <input class="form-check-input" type="checkbox" formControlName="isSameAsPrimaryAddress"
@@ -185,79 +98,10 @@
               If primary and secondary are same.
             </label>
           </div>
-          <ng-container  formGroupName="secondaryAddress">
 
-          <div class="form-group">
-              <label for="email">Email</label>
-              <input type="text"
-                id="email"
-                class="form-control"
-                formControlName="email"
-              >
-              <span 
-                *ngIf="signupForm.controls.secondaryAddress.controls.email.errors"
-                class="help-block2" style="color: red;">Please enter a valid email. </span>
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone No</label>
-            <input type="text"
-              id="phone"
-              class="form-control"
-              formControlName="phone"
-              >
-            <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.phone.invalid &&  (signupForm.controls.secondaryAddress.controls.phone.dirty || signupForm.controls.secondaryAddress.   controls.phone.touched)">
-              <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.phone.errors?.NotElevenDigit
-              && !signupForm.controls.secondaryAddress.controls.phone.errors?.NotADigit">
-                Should be 11 digits.
-              </span>
-              <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.phone.errors?.NotADigit">
-                Only digits are allowed
-              </span>
-            </span>
-          </div>
-          <div class="form-group">
-            <label for="address">Address</label>
-            <input type="text"
-              id="address"
-              class="form-control"
-              formControlName="address"
-            >
-          </div>
-          <div class="form-group">
-            <label for="city">City</label>
-            <input type="text"
-                id="city"
-                class="form-control"
-                formControlName="city"
-                >
-          </div>
-          <div class="form-group">
-            <label for="country">Country</label>
-            <input type="text"
-              id="country"
-              class="form-control"
-              formControlName="country"
-            >
-          </div>
-          <div class="form-group">
-            <label for="postCode">Post Code</label>
-            <input type="text"
-              id="postCode"
-              class="form-control"
-              formControlName="postCode"
-              >
-              <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.postCode.invalid &&
-              (signupForm.controls.secondaryAddress.controls.postCode.dirty || signupForm.controls.secondaryAddress.controls.postCode.touched)">
-                  <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.postCode.errors?.required">
-                    Post code is a required field
-                  </span>
-                  <span class="help-block" *ngIf="signupForm.controls.secondaryAddress.controls.postCode.errors?.maxlength">
-                    Not more than 5 Character
-                  </span>
-              </span>
-                
-          </div>
-          </ng-container>
+          <!-- secondary address form -->
+          <app-common-address [group]="signupForm.controls.secondaryAddress" [addressType]="'Secondary'"></app-common-address>
+
         </div>
         <!-- <div formArrayName="hobbies">
             <h3>hobbies List </h3>

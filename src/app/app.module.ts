@@ -23,6 +23,7 @@ import { ViewEncapsulationV2Component } from './encap-v2/encap-v2.component';
 import { ViewEncapsulationv2Child1Component} from'./encap-v2/encap-v2-child1/encap-v2-child1.component';
 import { ViewEncapsulationV2Child2Component} from'./encap-v2/encap-v2-child2/encap-v2-child2.component';
 import { ViewEncapsulationv2Child3Component} from './encap-v2/encap-v2-child3/encap-v2-child3.component';
+import { CommonAddressComponent } from './reactive/common-address/common-address.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ViewEncapsulationv2Child3Component} from './encap-v2/encap-v2-child3/en
     ViewEncapsulationV2Component,
     ViewEncapsulationv2Child1Component,
     ViewEncapsulationV2Child2Component,
-    ViewEncapsulationv2Child3Component
+    ViewEncapsulationv2Child3Component,
+    CommonAddressComponent
 
   ],
   imports: [

@@ -1,0 +1,93 @@
+<div [formGroup]="group">
+<div>
+    <div class="form-group">
+      <label for="email">Email <span *ngIf="(addressType==='Primary')" class="requiered-mark">*</span></label>
+      <input type="text"
+      id="email"
+      class="form-control"
+      formControlName="email"
+      >
+      <span 
+      *ngIf="group.controls.email?.errors"
+      class="help-block">Please enter a valid email. </span>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone No <span *ngIf="(addressType==='Primary')" class="requiered-mark">*</span></label>
+      <input type="text"
+      id="phone"
+      class="form-control"
+      formControlName="phone"
+      >
+      <span class="help-block" *ngIf="group.controls.phone.invalid && (group.controls.phone.dirty || group.controls.phone.touched)">
+        <span class="help-block" *ngIf="group.controls.phone.errors?.required">Phone no is required.</span>
+        <span class="help-block" *ngIf="group.controls.phone.errors?.NotElevenDigit
+        && !group.controls.phone.errors?.NotADigit">
+          Phone number should be 11 digit.
+        </span>
+        <span class="help-block" *ngIf="group.controls.phone.errors?.NotADigit">
+          Only digits are allowed
+        </span>
+    </span>
+    </div>
+    <div class="form-group">
+      <label for="address">Address <span *ngIf="(addressType==='Primary')" class="requiered-mark">*</span></label>
+      <input type="text"
+      id="address"
+      class="form-control"
+      formControlName="address"
+      >
+      <span class="help-block" *ngIf="group.controls.address.invalid &&
+      (group.controls.address.dirty || group.controls.address.touched)">
+      <span class="help-block" *ngIf="group.controls.address.errors?.required"> 
+        Address is a required field.
+      </span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="city">City <span *ngIf="(addressType==='Primary')" class="requiered-mark">*</span></label>
+      <input type="text"
+      id="city"
+      class="form-control"
+      formControlName="city"
+      
+      >
+      <span class="help-block" *ngIf="group.controls.city.invalid &&
+      (group.controls.city.dirty || group.controls.city.touched)">
+      <span class="help-block" *ngIf="group.controls.city.errors?.required"> 
+        City is a required field.
+      </span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="country">Country <span *ngIf="(addressType==='Primary')" class="requiered-mark">*</span></label>
+      <input type="text"
+      id="country"
+      class="form-control"
+      formControlName="country"
+      >
+      <span class="help-block" *ngIf="group.controls.country.invalid &&
+      (group.controls.country.dirty || group.controls.country.touched)">
+      <span class="help-block" *ngIf="group.controls.country.errors?.required"> 
+        Country is a required field.
+      </span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="postCode">Post Code <span *ngIf="(addressType==='Primary')" class="requiered-mark">*</span></label>
+      <input type="text"
+      id="postCode"
+      class="form-control"
+      formControlName="postCode"
+      >
+      <span class="help-block" *ngIf="group.controls.postCode.invalid &&
+      (group.controls.postCode.dirty || group.controls.postCode.touched)">
+          <span class="help-block" *ngIf="group.controls.postCode.errors?.required">
+            Post code is a required field
+          </span>
+          <span class="help-block" *ngIf="group.controls.postCode.errors?.maxlength">
+            Not more than 5 Character
+          </span>
+      </span>
+    </div>
+  </div>
+</div>
