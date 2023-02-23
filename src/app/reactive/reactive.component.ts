@@ -19,6 +19,7 @@ export class ReactiveFormComponent implements OnInit{
   isCollapse: boolean;
   editFormArrayValue: boolean;
   formArrayIndexnumber: number;
+  formArrayOldValueForEditControl: string;
   
   constructor( private router: Router, private activatedRoute: ActivatedRoute){
   }
@@ -129,12 +130,21 @@ export class ReactiveFormComponent implements OnInit{
   }
 
   arrayFormEdit(i: number){
+    this.formArrayOldValueForEditControl = this.signupForm.controls.hobbies.value[i]
     this.editFormArrayValue = true;
     this.formArrayIndexnumber = i
+    console.log("edit form array",this.formArrayOldValueForEditControl);
   }
 
   arrayFormUpdate(i: number){
     this.formArrayIndexnumber = null;
+    console.log("update value",this.signupForm.controls.hobbies.value);
+  }
+
+  arrayFormCancel(i: number){
+    (<FormArray>this.signupForm.controls['hobbies']).at(i).patchValue(this.formArrayOldValueForEditControl)
+    this.formArrayIndexnumber = null;
+    console.log("cancel value",this.signupForm.controls.hobbies.value[i])
   }
 
   onClear(){
