@@ -106,7 +106,7 @@
 
         </div>
 
-        <!-- add hobbies : array form -->
+        <!-- hobby section -->
         <div formArrayName="hobbies">
             <h3>hobbies List </h3>
             <div *ngIf="signupForm.controls.hobbies.length > 1 ">
@@ -114,35 +114,33 @@
                 <thead>
                   <tr>
                     <th scope="col">Hobbies Name</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Actions</th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let hobby of signupForm.get('hobbies').controls; let i=index;">
                   <tr *ngIf="i!==signupForm.controls.hobbies.length-1">
-                    <td>{{hobby.value}}</td>
-                    <td><button type="button" class="btn btn-warning" (click)="arrayFormEdit(i)">edit</button></td>
+                    
+                    <td>
+                      <h4 *ngIf="formArrayIndexnumber !== i">{{   hobby.value}}</h4>
+                      <input *ngIf="formArrayIndexnumber ===i" type="text" class="form-control" [formControlName]="formArrayIndexnumber">
+                    </td>
+                    <td><button type="button" class="btn btn-warning" (click)="arrayFormEdit(i)">Edit</button></td>
+                    <td><button type="button" class="btn btn-danger" [disabled]="editFormArrayValue" (click)="arrayFormCancel(i)">Cancel</button></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-
-            <div *ngIf="editFormArrayValue">
-              <input type="text" class="form-control" [formControlName]="formArrayIndexnumber">
-            </div>
-
+            <!-- form control of form array -->
             <div class="form-group"
             *ngFor = "let hobby of signupForm.get('hobbies')?.controls; let i =index"
             > 
-
               <div *ngIf="i >signupForm.controls.hobbies.length-2">
                 <input type="text" class="form-control" [formControlName]="signupForm.controls.hobbies.length-1">
               </div>
-              
-            </div>
-
+              </div>
             <button type="button"
             class="btn btn-success"
-            (click)="addHobby()"
+            (click)="addHobby($event.target)"
             style="margin-bottom: 10px;"
             >Add Hobby</button>
         </div>

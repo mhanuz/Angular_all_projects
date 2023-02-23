@@ -120,10 +120,12 @@ export class ReactiveFormComponent implements OnInit{
     this.router.navigate(['reactive-form'], {queryParams:{isCollapse:this.isCollapse}})
   }
 
-  addHobby(){
-    const control = new FormControl(null, Validators.required);
+  addHobby(element?: HTMLElement){
+    const control = new FormControl(null);
     (<FormArray>this.signupForm.get('hobbies')).push(control);
-    console.log(this.signupForm.get('hobbies').value.length);
+    if(this.signupForm.controls.hobbies.length >1){
+      element.textContent="add more"
+    }
   }
 
   arrayFormEdit(i: number){
@@ -131,10 +133,13 @@ export class ReactiveFormComponent implements OnInit{
     this.formArrayIndexnumber = i
   }
 
-  onClear(){
-   // this.signupForm.controls.hobbies.clear();
-    this.signupForm.reset();
+  arrayFormCancel(i: number){
+    
   }
 
+  onClear(){
+    this.signupForm.controls.hobbies.clear();
+    this.signupForm.reset();
+  }
 
 }
