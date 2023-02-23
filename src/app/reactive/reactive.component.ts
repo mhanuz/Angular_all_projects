@@ -133,8 +133,8 @@ export class ReactiveFormComponent implements OnInit{
     this.formArrayIndexnumber = i
   }
 
-  arrayFormCancel(i: number){
-    
+  arrayFormUpdate(i: number){
+    this.formArrayIndexnumber = null;
   }
 
   onClear(){

@@ -121,11 +121,17 @@
                   <tr *ngIf="i!==signupForm.controls.hobbies.length-1">
                     
                     <td>
-                      <h4 *ngIf="formArrayIndexnumber !== i">{{   hobby.value}}</h4>
-                      <input *ngIf="formArrayIndexnumber ===i" type="text" class="form-control" [formControlName]="formArrayIndexnumber">
+                      <h4 *ngIf="formArrayIndexnumber !== i">{{hobby.value}}</h4>
+                      <input *ngIf="formArrayIndexnumber===i" type="text" class="form-control" [formControlName]="formArrayIndexnumber">
                     </td>
-                    <td><button type="button" class="btn btn-warning" (click)="arrayFormEdit(i)">Edit</button></td>
-                    <td><button type="button" class="btn btn-danger" [disabled]="editFormArrayValue" (click)="arrayFormCancel(i)">Cancel</button></td>
+                    <td>
+                      <button type="button" class="btn btn-warning" 
+                      style="margin-right: 10px;"
+                      (click)="arrayFormEdit(i)">Edit</button>
+                      <button type="button" class="btn btn-success"  
+                      (click)="arrayFormUpdate(i)">Update</button>
+                    </td>
+                    
                   </tr>
                 </tbody>
               </table>
