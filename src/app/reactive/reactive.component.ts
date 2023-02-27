@@ -79,7 +79,7 @@ export class ReactiveFormComponent implements OnInit{
             this.signupForm.controls.primaryAddress.controls[field].enable();
           } 
           this.signupForm.controls.basicInfo.controls[field].valueChanges.subscribe((basicInfo)=>{
-              this.signupForm.controls.primaryAddress.controls[field].setValue(basicInfo)
+          this.signupForm.controls.primaryAddress.controls[field].setValue(basicInfo)
         })
       })
     })
@@ -99,9 +99,8 @@ export class ReactiveFormComponent implements OnInit{
             this.signupForm.controls.secondaryAddress.controls[field].patchValue('')
             this.signupForm.controls.secondaryAddress.controls[field].enable(); 
           }
-          
           this.signupForm.controls.primaryAddress.controls[field].valueChanges.subscribe((primaryAddress) => {
-                this.signupForm.controls.secondaryAddress.controls[field].patchValue(primaryAddress)
+          this.signupForm.controls.secondaryAddress.controls[field].patchValue(primaryAddress)
             })
       })
     })
@@ -109,10 +108,8 @@ export class ReactiveFormComponent implements OnInit{
 
   onSubmit(){
     if (this.signupForm.valid) {
-      // getraw value will show disable value also
       console.log(this.signupForm.getRawValue());
       this.onClear();
-    
     }
   }
 
@@ -133,18 +130,18 @@ export class ReactiveFormComponent implements OnInit{
     this.formArrayOldValueForEditControl = this.signupForm.controls.hobbies.value[i]
     this.editFormArrayValue = true;
     this.formArrayIndexnumber = i
-    console.log("edit form array",this.formArrayOldValueForEditControl);
+    console.log("Array Form Index",this.formArrayIndexnumber);
   }
 
   arrayFormUpdate(i: number){
     this.formArrayIndexnumber = null;
-    console.log("update value",this.signupForm.controls.hobbies.value);
+    this.editFormArrayValue = false;
   }
 
   arrayFormCancel(i: number){
     (<FormArray>this.signupForm.controls['hobbies']).at(i).patchValue(this.formArrayOldValueForEditControl)
     this.formArrayIndexnumber = null;
-    console.log("cancel value",this.signupForm.controls.hobbies.value[i])
+    this.editFormArrayValue = false;
   }
 
   onClear(){

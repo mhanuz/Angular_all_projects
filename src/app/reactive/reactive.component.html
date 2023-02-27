@@ -130,8 +130,8 @@
                       (click)="arrayFormEdit(i)">Edit</button>
                       <button type="button" class="btn btn-info" 
                       style="margin-right: 10px;" 
-                      (click)="arrayFormUpdate(i)">Update</button>
-                      <button type="button" class="btn btn-danger"
+                      (click)="arrayFormUpdate(i)" [disabled]="formArrayIndexnumber !==i">Update</button>
+                      <button type="button" class="btn btn-danger" [disabled]="formArrayIndexnumber !==i"
                       (click)="arrayFormCancel(i)"
                       >
                       Cancel
